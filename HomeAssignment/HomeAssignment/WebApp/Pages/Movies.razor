@@ -1,0 +1,49 @@
+﻿@page "/movies"
+@using SharedModels.Models
+@inherits MovieBase
+
+@if(Movies == null)
+{
+	<h3> Loading Movies ... </h3>
+}
+else
+{
+	<h3 class="mb-5"> Movies </h3>
+
+	var moviesCount = Movies.Count();
+
+	@if (moviesCount > 0)
+	{
+		const int moviesPerRow = 3;
+		var moviesRowList = new List<MovieDTO>();
+
+		@for (int i = 0; i < moviesCount; i++)
+		{
+			moviesRowList = Movies.Skip(i * moviesPerRow).Take(moviesPerRow).ToList();
+
+			<div class="row mt-3">
+
+				@foreach (var item in moviesRowList)
+			{
+				<div class="col-md-3 mb-2">
+					<a href="#">
+						<div class="card">
+							<img class="img-thumbnail" src="@item.PictureUri" />
+							<div class="card-body">
+								<h5 class="card-title mb-3">
+									@item.Title
+								</h5>
+								<p class="card-text">
+									<b>$@item.Price.ToString()</b>
+								</p>
+							</div>
+						</div>
+					</a>
+				</div>
+
+			}
+
+			</div>
+		}
+	}
+}
