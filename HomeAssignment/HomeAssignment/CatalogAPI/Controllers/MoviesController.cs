@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CatalogAPI.Models;
 using CatalogAPI.Services;
+using Newtonsoft.Json.Linq;
+using RestSharp;
+using MongoDB.Bson.IO;
+using Newtonsoft.Json;
 
 namespace CatalogAPI.Controllers
 {
@@ -92,6 +96,24 @@ namespace CatalogAPI.Controllers
         {
             var movie = await _service.GetAsync(id);
             return movie != null;
+        }
+
+        [HttpGet("titles")]
+        public async Task<ActionResult<IEnumerable<Movie>>> GetMoviesByGenre(string genre)
+        {
+            try
+            {
+                var movies = await _service.GetMoviesByGenreAsync(genre);
+                if (movies == null || movies.Count == 0)
+                {
+                    return NotFound();
+                }
+                return Ok(movies);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
     }
 }

@@ -1,0 +1,53 @@
+﻿@page "/basket"
+@using SharedModels.Models
+@inherits BasketItemsBase
+
+@if(BasketItems == null)
+{
+	<h3> Loading Basket ... </h3>
+}
+else
+{
+	<h3 class="mb-5"> Basket </h3>
+
+	var basketCount = BasketItems.Count();
+
+	if(basketCount > 0)
+	{
+		const int itemPerRow = 3;
+		var basketRowList = new List<BasketItemDTO>();
+		@for(int i = 0; i < basketCount; i++)
+		{
+			basketRowList = BasketItems.Skip(i * itemPerRow).Take(itemPerRow).ToList();
+
+			<div class="row mt-3">
+				@foreach(var item in basketRowList)
+				{
+					var total = item.Quantity * item.UnitPrice;
+
+					<div class="col-md-3 mb-2">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title mb-3">
+									@item.ProductName
+								</h5>
+								<p class="card-text">
+									Unit Price: $@item.UnitPrice.ToString();
+								</p>
+								<p class="card-text">
+									Quanity: $@item.Quantity.ToString();
+								</p>
+								<p class="card-text">
+									<b>Total: $@total.ToString()</b>;
+								</p>
+							</div>
+						</div>
+					</div>
+				}
+			</div>
+		}
+
+
+
+}
+}

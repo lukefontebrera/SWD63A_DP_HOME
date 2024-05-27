@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ODBtTBm2k/HaDIBWvGOAYPjMv2oFhK7Lc559p9+BUSGztEXoPuDsFLkNYUwmwWz33yceevaDrzWXq6HJYBuspQ==",
+  "dgSpecHash": "kBOBzEgYyyUGFfi7NRjfxkOcXkgQVEQo6eUB45E/NyyXt5SYNRYqRFgdBvfKzC6gnbDz9oZTgBTOc4DEHWWHVg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Luke\\Desktop\\School\\Year 3\\Distributed Programming\\Home Assignment\\SWD63A_DP_HOME\\HomeAssignment\\HomeAssignment\\WebApp\\WebApp.csproj",
   "expectedPackageFiles": [
@@ -30,6 +30,8 @@
     "C:\\Users\\Luke\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
     "C:\\Users\\Luke\\.nuget\\packages\\microsoft.jsinterop\\6.0.10\\microsoft.jsinterop.6.0.10.nupkg.sha512",
     "C:\\Users\\Luke\\.nuget\\packages\\microsoft.jsinterop.webassembly\\6.0.10\\microsoft.jsinterop.webassembly.6.0.10.nupkg.sha512",
+    "C:\\Users\\Luke\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\Luke\\.nuget\\packages\\restsharp\\111.1.0\\restsharp.111.1.0.nupkg.sha512",
     "C:\\Users\\Luke\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
     "C:\\Users\\Luke\\.nuget\\packages\\system.io.pipelines\\6.0.3\\system.io.pipelines.6.0.3.nupkg.sha512",
     "C:\\Users\\Luke\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",

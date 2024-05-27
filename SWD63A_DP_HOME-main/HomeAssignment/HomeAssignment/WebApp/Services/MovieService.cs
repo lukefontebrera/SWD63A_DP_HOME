@@ -1,0 +1,42 @@
+﻿using SharedModels.Models;
+using System.Net.Http.Json;
+
+namespace WebApp.Services
+{
+    public class MovieService : IMovieService
+    {
+        private readonly HttpClient _httpClient;
+
+        public MovieService(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
+
+        public async Task<IEnumerable<MovieDTO>> GetMoviesByGenre(string genre)
+        {
+            try
+            {
+                var movies = await _httpClient.GetFromJsonAsync<IEnumerable<MovieDTO>>($"gateway/Movies?genre={genre}");
+                return movies;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<MovieDTO>> GetMovieByName(string name)
+        {
+            try
+            {
+                var movie = await _httpClient.GetFromJsonAsync<IEnumerable<MovieDTO>>($"gateway/Movies/{name}");
+                return movie;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+    }
+}

@@ -10,10 +10,5 @@ namespace WebApp.Pages
 		public IMovieService MovieService { get; set; }
 
 		public IEnumerable<MovieDTO> Movies { get; set; }
-
-		protected override async Task OnInitializedAsync()
-		{
-            Movies = await MovieService.GetItems();
-		}
 	}
 }

@@ -2,8 +2,8 @@
 
 namespace WebApp.Services
 {
-    public interface IBasketService
-    {
-        Task<IEnumerable<BasketItemDTO>> GetItems();
+    public interface IMovieService
+    { 
+        Task<IEnumerable<MovieDTO>> GetMoviesByGenreAsync(string genre);
     }
 }

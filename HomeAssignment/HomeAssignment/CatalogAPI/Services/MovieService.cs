@@ -39,5 +39,8 @@ namespace CatalogAPI.Services
 
         public async Task RemoveAsync(string id) =>
             await _moviesCollection.DeleteOneAsync(x => x.Id == id);
+
+        public async Task<List<Movie>> GetMoviesByGenreAsync(string genre) =>
+            await _moviesCollection.Find(x => x.Genre == genre).ToListAsync();
     }
 }

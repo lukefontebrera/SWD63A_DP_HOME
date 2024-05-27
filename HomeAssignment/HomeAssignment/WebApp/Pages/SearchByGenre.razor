@@ -1,0 +1,46 @@
+﻿@page "/search"
+@using SharedModels.Models
+@using WebApp.Services
+@inject IMovieService MovieService
+
+<h3>Search Movies by Genre</h3>
+
+<input @bind="genre" placeholder="Enter genre" />
+<button @onclick="SearchMovies">Search</button>
+
+@if (movies == null)
+{
+    <h3>Loading...</h3>
+}
+else if (!movies.Any())
+{
+    <h3>No movies found for the genre "@genre".</h3>
+}
+else
+{
+    <h3 class="mb-5">Movies in "@genre" Genre</h3>
+    <div class="row">
+        @foreach (var movie in movies)
+        {
+            <div class="col-md-3 mb-2">
+                <div class="card">
+                    <img class="img-thumbnail" src="@movie.PictureUri" />
+                    <div class="card-body">
+                        <h5 class="card-title">@movie.Title</h5>
+                        <p class="card-text"><b>@movie.Price.ToString("C")</b></p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private string genre;
+    private IEnumerable<MovieDTO> movies;
+
+    private async Task SearchMovies()
+    {
+        movies = await MovieService.GetMoviesByGenreAsync(genre);
+    }
+}

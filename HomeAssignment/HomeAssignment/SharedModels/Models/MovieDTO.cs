@@ -20,6 +20,8 @@ namespace SharedModels.Models
 
         public int ReleaseYear { get; set; }
 
+        public string Genre { get; set; } = null!;
+
         public DateTime? ReleaseDate { get; set; }
     }
 }

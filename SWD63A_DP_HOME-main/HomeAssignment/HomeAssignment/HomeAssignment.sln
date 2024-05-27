@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityAPI", "IdentityAPI\IdentityAPI.csproj", "{5A1F6F50-9B6A-4C96-8ADC-C42EE5F1357B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Middleware", "Middleware\Middleware.csproj", "{202E2F74-C611-415E-AC55-BA76C0CD328B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csproj", "{8A1FB16C-AC3E-4888-8C69-FD3857D1B1C9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatalogAPI", "CatalogAPI\CatalogAPI.csproj", "{91DEBEE3-61DA-4F65-B3EA-293F138A1931}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasketAPI", "BasketAPI\BasketAPI.csproj", "{C672B498-332D-4D6C-9F7F-5339B15E20E2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GatewayAPI", "GatewayAPI\GatewayAPI.csproj", "{7EADF587-96DF-4F8D-890A-EF81CC19F4AC}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedModels", "SharedModels\SharedModels.shproj", "{528C9C55-CB38-48C2-9FE5-C829DA3CCECC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WishlistAPI", "WishlistAPI\WishlistAPI.csproj", "{9E9BACAE-7E3F-4A8C-8B92-58053A1DA625}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A1F6F50-9B6A-4C96-8ADC-C42EE5F1357B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A1F6F50-9B6A-4C96-8ADC-C42EE5F1357B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A1F6F50-9B6A-4C96-8ADC-C42EE5F1357B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A1F6F50-9B6A-4C96-8ADC-C42EE5F1357B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{202E2F74-C611-415E-AC55-BA76C0CD328B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{202E2F74-C611-415E-AC55-BA76C0CD328B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{202E2F74-C611-415E-AC55-BA76C0CD328B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{202E2F74-C611-415E-AC55-BA76C0CD328B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A1FB16C-AC3E-4888-8C69-FD3857D1B1C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A1FB16C-AC3E-4888-8C69-FD3857D1B1C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A1FB16C-AC3E-4888-8C69-FD3857D1B1C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A1FB16C-AC3E-4888-8C69-FD3857D1B1C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91DEBEE3-61DA-4F65-B3EA-293F138A1931}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91DEBEE3-61DA-4F65-B3EA-293F138A1931}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91DEBEE3-61DA-4F65-B3EA-293F138A1931}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91DEBEE3-61DA-4F65-B3EA-293F138A1931}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C672B498-332D-4D6C-9F7F-5339B15E20E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C672B498-332D-4D6C-9F7F-5339B15E20E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C672B498-332D-4D6C-9F7F-5339B15E20E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C672B498-332D-4D6C-9F7F-5339B15E20E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EADF587-96DF-4F8D-890A-EF81CC19F4AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EADF587-96DF-4F8D-890A-EF81CC19F4AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EADF587-96DF-4F8D-890A-EF81CC19F4AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EADF587-96DF-4F8D-890A-EF81CC19F4AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E9BACAE-7E3F-4A8C-8B92-58053A1DA625}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E9BACAE-7E3F-4A8C-8B92-58053A1DA625}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E9BACAE-7E3F-4A8C-8B92-58053A1DA625}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E9BACAE-7E3F-4A8C-8B92-58053A1DA625}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {66648FEA-550A-4082-9F44-F484FD097766}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SharedModels\SharedModels.projitems*{528c9c55-cb38-48c2-9fe5-c829da3ccecc}*SharedItemsImports = 13
+		SharedModels\SharedModels.projitems*{8a1fb16c-ac3e-4888-8c69-fd3857d1b1c9}*SharedItemsImports = 5
+	EndGlobalSection
+EndGlobal
