@@ -17,9 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GatewayAPI", "GatewayAPI\Ga
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedModels", "SharedModels\SharedModels.shproj", "{528C9C55-CB38-48C2-9FE5-C829DA3CCECC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WishlistAPI", "WishlistAPI\WishlistAPI.csproj", "{9E9BACAE-7E3F-4A8C-8B92-58053A1DA625}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WishlistAPI", "WishlistAPI\WishlistAPI.csproj", "{9E9BACAE-7E3F-4A8C-8B92-58053A1DA625}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentAPI", "PaymentAPI\PaymentAPI.csproj", "{E891CB96-3699-4FF6-95DA-F126724A70CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentAPI", "PaymentAPI\PaymentAPI.csproj", "{E891CB96-3699-4FF6-95DA-F126724A70CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

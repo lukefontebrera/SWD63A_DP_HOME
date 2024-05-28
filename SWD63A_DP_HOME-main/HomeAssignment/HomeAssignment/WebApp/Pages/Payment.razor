@@ -1,0 +1,90 @@
+﻿@page "/payment"
+@using SharedModels.Models
+@using WebApp.Services
+@inherits PaymentBase
+@inject IBasketService BasketService
+@inject NavigationManager Navigation
+
+<h3 class="mb-5">Payment</h3>
+
+@if (BasketItems == null)
+{
+    <h3>Loading Basket...</h3>
+}
+else
+{
+    @if (BasketItems.Any())
+    {
+        <div class="mb-3">
+            <h4>Basket Items</h4>
+            @foreach (var item in BasketItems)
+            {
+                <div class="d-flex justify-content-between">
+                    <div>@item.Title</div>
+                    <div>$@item.UnitPrice.ToString("0.00")</div>
+                </div>
+            }
+        </div>
+
+        <div class="mb-3">
+            <h5>Total: $@(BasketItems.Sum(item => item.UnitPrice).ToString("0.00"))</h5>
+        </div>
+
+        <div class="mb-3">
+            <h4>Card Details</h4>
+            <div class="form-group">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" class="form-control" placeholder="Card Number" />
+            </div>
+            <div class="form-group">
+                <label for="expiryDate">Expiry Date</label>
+                <input type="text" id="expiryDate" class="form-control" placeholder="MM/YY" />
+            </div>
+            <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" class="form-control" placeholder="CVV" />
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-primary" @onclick="ConfirmOrder">
+            Confirm Order
+        </button>
+    }
+    else
+    {
+        <p>Your basket is empty.</p>
+    }
+}
+
+@code {
+    private IEnumerable<BasketItemDTO> BasketItems { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        BasketItems = await BasketService.GetItems();
+        await base.OnInitializedAsync();
+    }
+
+    private async Task ConfirmOrder()
+    {
+        BasketItems = await BasketService.GetItems();
+
+        string userId = "123";
+        decimal amount = BasketItems.Count() * 10;
+        DateTime timestamp = DateTime.Now;
+        string[] movieIds = BasketItems.Select(item => item.MovieId).ToArray();
+
+        PaymentDTO payment = new PaymentDTO
+            {
+                UserId = userId,
+                Amount = amount,
+                Timestamp = timestamp,
+                MovieIds = movieIds
+            };
+
+        await PaymentService.AddPayment(payment);
+
+        // Navigate to order confirmation page
+        Navigation.NavigateTo("/order-confirmation");
+    }
+}

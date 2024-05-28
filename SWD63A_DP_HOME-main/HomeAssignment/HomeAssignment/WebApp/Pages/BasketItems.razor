@@ -1,6 +1,7 @@
 ﻿@page "/basket"
 @using SharedModels.Models
 @inherits BasketItemsBase
+@inject NavigationManager Navigation
 
 @if (BasketItems == null)
 {
@@ -56,6 +57,6 @@ else
 {
     async Task ProceedToPayment()
     {
-        // Implement navigation to the payment page
+        Navigation.NavigateTo("/payment");
     }
 }

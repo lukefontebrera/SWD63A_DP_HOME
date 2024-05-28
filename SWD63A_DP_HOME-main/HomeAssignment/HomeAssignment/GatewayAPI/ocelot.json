@@ -122,6 +122,30 @@
           "Port": 5031 // Update to the port where your Basket API is running
         }
       ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Payments",
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "DownstreamPathTemplate": "/api/Payments",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5258 // Update to the port where your Basket API is running
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Payments/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/api/Payments/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5258 // Update to the port where your Basket API is running
+        }
+      ]
     }
   ]
 }

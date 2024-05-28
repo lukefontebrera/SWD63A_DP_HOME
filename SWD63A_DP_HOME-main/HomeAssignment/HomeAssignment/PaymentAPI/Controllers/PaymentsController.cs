@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using PaymentAPI.Models;
+using PaymentAPI.Services;
 
 namespace PaymentAPI.Controllers
 {
@@ -13,33 +15,25 @@ namespace PaymentAPI.Controllers
     [ApiController]
     public class PaymentsController : ControllerBase
     {
-        private readonly PaymentContext _context;
+        private readonly PaymentService _service;
 
-        public PaymentsController(PaymentContext context)
+        public PaymentsController(PaymentService service)
         {
-            _context = context;
+            _service = service;
         }
 
         // GET: api/Payments
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Payment>>> GetPayments()
         {
-          if (_context.Payments == null)
-          {
-              return NotFound();
-          }
-            return await _context.Payments.ToListAsync();
+            return await _service.GetAsync();
         }
 
         // GET: api/Payments/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Payment>> GetPayment(string id)
         {
-          if (_context.Payments == null)
-          {
-              return NotFound();
-          }
-            var payment = await _context.Payments.FindAsync(id);
+            var payment = await _service.GetAsync(id);
 
             if (payment == null)
             {
@@ -49,89 +43,73 @@ namespace PaymentAPI.Controllers
             return payment;
         }
 
-        // PUT: api/Payments/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPayment(string id, Payment payment)
-        {
-            if (id != payment.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(payment).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PaymentExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
 
         // POST: api/Payments
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Payment>> PostPayment(Payment payment)
         {
-          if (_context.Payments == null)
-          {
-              return Problem("Entity set 'PaymentContext.Payments'  is null.");
-          }
-            _context.Payments.Add(payment);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (PaymentExists(payment.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
 
-            return CreatedAtAction("GetPayment", new { id = payment.Id }, payment);
+            using (var httpClient = new HttpClient())
+            {
+                try
+                {
+                    var response = await httpClient.GetAsync($"http://localhost:5003/gateway/Payments/");
+                    Console.WriteLine($"Received response: {(int)response.StatusCode} - {response.ReasonPhrase}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine($"Payment details: {content}");
+
+                        var jsonContent = JArray.Parse(content); // Parse the response as a JArray
+
+                        if (jsonContent == null || !jsonContent.Any())
+                        {
+                            Console.WriteLine("Payment content is null or empty.");
+                            return NotFound("Payment content is null or empty.");
+                        }
+
+                        var firstItem = jsonContent.First;
+
+                        if (firstItem == null)
+                        {
+                            Console.WriteLine("No items found in the response.");
+                            return NotFound("No items found in the response.");
+                        }
+
+                        payment.UserId = firstItem["userId"].Value<string>();
+                        payment.Amount = firstItem["amount"].Value<int>();
+                        payment.Timestamp = firstItem["timestamp"].Value<DateTime>();
+                        payment.MovieIds = firstItem["movieIds"].Value <string[]>();
+
+                        await _service.CreateAsync(payment);
+
+                        return CreatedAtAction("GetBasketItem", new { id = payment.Id }, payment);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Payment not found: {response.ReasonPhrase}");
+                        return NotFound("Payment not found.");
+                    }
+                }
+                catch (HttpRequestException e)
+                {
+                    Console.WriteLine($"HTTP Request error: {e.Message}");
+                    return StatusCode(StatusCodes.Status503ServiceUnavailable, "Error fetching movie data.");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Unexpected error: {e.Message}");
+                    return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred.");
+                }
+            }
         }
 
-        // DELETE: api/Payments/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePayment(string id)
+        private async Task<bool> PaymentExists(string id)
         {
-            if (_context.Payments == null)
-            {
-                return NotFound();
-            }
-            var payment = await _context.Payments.FindAsync(id);
-            if (payment == null)
-            {
-                return NotFound();
-            }
-
-            _context.Payments.Remove(payment);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool PaymentExists(string id)
-        {
-            return (_context.Payments?.Any(e => e.Id == id)).GetValueOrDefault();
+            var payment = await _service.GetAsync(id);
+            return payment != null;
         }
     }
 }
