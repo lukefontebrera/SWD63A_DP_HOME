@@ -28,6 +28,16 @@
 				<InputText Id="email" Class="form-control" @bind-Value="registerModel.Email" />
 				<ValidationMessage For="@(() => registerModel.Email)" />
 			</div>
+			@*<div class="form-group">
+				<label for="name">First Name</label>
+				<InputText Id="name" Class="form-control" @bind-Value="registerModel.Name" />
+				<ValidationMessage For="@(() => registerModel.Name)" />
+			</div>
+			<div class="form-group">
+				<label for="surname">Surname</label>
+				<InputText Id="surname" Class="form-control" @bind-Value="registerModel.Surname" />
+				<ValidationMessage For="@(() => registerModel.Surname)" />
+			</div>*@
 			<div class="form-group">
 				<label for="password">Password</label>
 				<InputText Id="password" type="password" Class="form-control" @bind-Value="registerModel.Password" />

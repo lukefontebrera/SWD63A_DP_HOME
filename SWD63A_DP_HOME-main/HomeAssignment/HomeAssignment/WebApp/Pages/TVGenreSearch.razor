@@ -1,6 +1,7 @@
 ﻿@page "/genretvsearch"
 @using SharedModels.Models
 @inherits MovieBase
+@using WebApp.Services
 
 <h3>Enter TV Genre:</h3>
 <input @bind="Genre" />
@@ -68,9 +69,24 @@ else
         Movies = await MovieService.GetTVShowByGenre(Genre);
     }
 
-    private void OrderMovie(string movieId)
+    [Inject]
+    public IBasketService BasketService { get; set; }
+
+    private async Task OrderMovie(string movieId)
     {
-        // Implement ordering logic here
+        var movie = Movies.FirstOrDefault(m => m.Id == movieId);
+        if (movie != null)
+        {
+            var basketItem = new BasketItemDTO
+                {
+                    PictureUri = movie.PictureUri,
+                    MovieId = movie.Id,
+                    Title = movie.Title,
+                    UnitPrice = movie.Price
+                };
+
+            await BasketService.AddToBasket(basketItem);
+        }
     }
 
     private void AddToWatchList(string movieId)

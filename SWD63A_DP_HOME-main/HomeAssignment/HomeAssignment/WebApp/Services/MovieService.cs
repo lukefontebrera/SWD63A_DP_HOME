@@ -16,7 +16,7 @@ namespace WebApp.Services
         {
             try
             {
-                var movies = await _httpClient.GetFromJsonAsync<IEnumerable<MovieDTO>>($"api/Movies/titles/movies/{genre}");
+                var movies = await _httpClient.GetFromJsonAsync<IEnumerable<MovieDTO>>($"gateway/Movies/titles/movies/{genre}");
                 return movies;
             }
             catch (Exception)
@@ -29,7 +29,7 @@ namespace WebApp.Services
         {
             try
             {
-                var movie = await _httpClient.GetFromJsonAsync<IEnumerable<MovieDTO>>($"api/Movies/titles/movies/search/title/{name}");
+                var movie = await _httpClient.GetFromJsonAsync<IEnumerable<MovieDTO>>($"gateway/Movies/titles/movies/search/title/{name}");
                 return movie;
             }
             catch (Exception)
@@ -42,7 +42,7 @@ namespace WebApp.Services
         {
             try
             {
-                var movies = await _httpClient.GetFromJsonAsync<IEnumerable<MovieDTO>>($"api/Movies/titles/tv/{genre}");
+                var movies = await _httpClient.GetFromJsonAsync<IEnumerable<MovieDTO>>($"gateway/Movies/titles/tv/{genre}");
                 return movies;
             }
             catch (Exception)
@@ -55,7 +55,7 @@ namespace WebApp.Services
         {
             try
             {
-                var movie = await _httpClient.GetFromJsonAsync<IEnumerable<MovieDTO>>($"api/Movies/titles/tv/search/title/{name}");
+                var movie = await _httpClient.GetFromJsonAsync<IEnumerable<MovieDTO>>($"gateway/Movies/titles/tv/search/title/{name}");
                 return movie;
             }
             catch (Exception)

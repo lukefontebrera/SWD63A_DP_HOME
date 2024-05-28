@@ -1,6 +1,7 @@
 ﻿@page "/moviesearch"
 @using SharedModels.Models
 @inherits MovieBase
+@using WebApp.Services
 
 <h3>Enter Movie Name:</h3>
 <input @bind="MovieName" />
@@ -55,6 +56,10 @@ else
                                             <b>Release Date:</b> @item.ReleaseDate.Value.ToShortDateString()
                                         </p>
                                     }
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-primary" @onclick="()=>OrderMovie(item.Id)">Order</button>
+                                        <button type="button" class="btn btn-secondary" @onclick="()=>AddToWatchList(item.Id)">Add to WatchList</button>
+                                    </div>
                                 </div>
                             </div>
                         </a>
@@ -62,5 +67,32 @@ else
                 }
             </div>
         }
+    }
+}
+
+@code {
+    [Inject]
+    public IBasketService BasketService { get; set; }
+
+    private async Task OrderMovie(string movieId)
+    {
+        var movie = Movies.FirstOrDefault(m => m.Id == movieId);
+        if (movie != null)
+        {
+            var basketItem = new BasketItemDTO
+                {
+                    PictureUri = movie.PictureUri,
+                    MovieId = movie.Id,
+                    Title = movie.Title,
+                    UnitPrice = movie.Price
+                };
+
+            await BasketService.AddToBasket(basketItem);
+        }
+    }
+
+    private void AddToWatchList(string movieId)
+    {
+        // Implement adding to watchlist logic here
     }
 }

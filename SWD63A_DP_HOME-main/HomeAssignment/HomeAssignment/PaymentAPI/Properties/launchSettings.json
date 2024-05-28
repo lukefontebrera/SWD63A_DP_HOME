@@ -1,0 +1,32 @@
+{
+  "profiles": {
+    "PaymentAPI": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "Database__ConnectionString": "mongodb+srv://fontebrera:XAN6c7lamnLzyfZ6@cluster0.qkdl5ag.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:5258"
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  },
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:4637",
+      "sslPort": 0
+    }
+  }
+}

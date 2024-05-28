@@ -24,5 +24,18 @@ namespace WebApp.Services
                 throw;
             }
         }
+
+        public async Task AddToBasket(BasketItemDTO basketItem)
+        {
+
+            var response = await _httpClient.PostAsJsonAsync("gateway/BasketItems", basketItem);
+            response.EnsureSuccessStatusCode();
+        }
+
+        public async Task DeleteItem(string itemId)
+        {
+            var response = await _httpClient.DeleteAsync($"gateway/BasketItems/{itemId}");
+            response.EnsureSuccessStatusCode();
+        }
     }
 }

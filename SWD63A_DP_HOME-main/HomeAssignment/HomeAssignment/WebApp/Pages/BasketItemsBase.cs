@@ -15,5 +15,12 @@ namespace WebApp.Pages
 		{
 			BasketItems = await BasketService.GetItems();
 		}
-	}
+
+        protected async Task DeleteItem(string itemId)
+        {
+            await BasketService.DeleteItem(itemId);
+
+            BasketItems = await BasketService.GetItems();
+        }
+    }
 }

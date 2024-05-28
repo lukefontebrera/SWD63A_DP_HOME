@@ -6,7 +6,7 @@
 
 <h1>Login</h1>
 
-@if(ShowErrors)
+@if (ShowErrors)
 {
 	<div class="alert alert-danger" role="alert">
 		<p>@Error</p>
@@ -17,8 +17,8 @@
 	<div class="card-body">
 		<h5 class="card-title">Please enter your details</h5>
 		<EditForm Model="loginModel" OnValidSubmit="HandleLogin">
-			<DataAnnotationsValidator/>
-			<ValidationSummary/>
+			<DataAnnotationsValidator />
+			<ValidationSummary />
 
 			<div class="form-group">
 				<label for="email">Email Address</label>
@@ -45,7 +45,7 @@
 		ShowErrors = false;
 		var result = await AuthService.Login(loginModel);
 
-		if(result.Successful)
+		if (result.Successful)
 		{
 			NavigationManager.NavigateTo("/");
 		}

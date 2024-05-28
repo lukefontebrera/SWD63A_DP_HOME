@@ -4,9 +4,9 @@
   },
   "Routes": [
     {
-      "UpstreamPathTemplate": "/gateway/movies/{everything}",
+      "UpstreamPathTemplate": "/gateway/Movies/titles/movies/{genre}",
       "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/movies",
+      "DownstreamPathTemplate": "/api/Movies/titles/movies/{genre}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -14,7 +14,114 @@
           "Port": 5032
         }
       ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Movies/titles/movies/search/title/{name}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Movies/titles/movies/search/title/{name}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5032
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Movies/titles/tv/{genre}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Movies/titles/tv/{genre}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5032
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Movies/titles/tv/search/title/{name}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Movies/titles/tv/search/title/{name}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5032
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/identity/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "DownstreamPathTemplate": "/api/identity/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5229
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/identity/register",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/Identity/register",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5229
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/identity/login",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/Identity/login",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5229
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/identity/validate",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Identity/validate",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5229
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/BasketItems",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/api/BasketItems",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5031 // Update to the port where your Basket API is running
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/BasketItems/{id}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ],
+      "DownstreamPathTemplate": "/api/BasketItems/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5031 // Update to the port where your Basket API is running
+        }
+      ]
     }
   ]
 }
-

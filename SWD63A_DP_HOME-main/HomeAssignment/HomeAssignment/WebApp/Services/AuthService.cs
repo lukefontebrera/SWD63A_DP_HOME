@@ -7,67 +7,68 @@ using WebApp.Models;
 
 namespace WebApp.Services
 {
-    public class AuthService: IAuthService
-    {
-        public readonly HttpClient _httpClient;
-        public readonly AuthenticationStateProvider _authenticationStateProvider;
-        private readonly ILocalStorageService _localStorageService;
+	public class AuthService : IAuthService
+	{
+		public readonly HttpClient _httpClient;
+		public readonly AuthenticationStateProvider _authenticationStateProvider;
+		private readonly ILocalStorageService _localStorageService;
 
-        public AuthService(HttpClient httpClient, 
-            AuthenticationStateProvider authenticationStateProvider, 
-            ILocalStorageService localStorageService)
-        {
-            _httpClient = httpClient;
-            _authenticationStateProvider = authenticationStateProvider;
-            _localStorageService = localStorageService;
-        }
+		public AuthService(HttpClient httpClient,
+			AuthenticationStateProvider authenticationStateProvider,
+			ILocalStorageService localStorageService)
+		{
+			_httpClient = httpClient;
+			_authenticationStateProvider = authenticationStateProvider;
+			_localStorageService = localStorageService;
+		}
 
-        public async Task<RegisterResult> Register(RegisterModel registerModel)
-        {
-            var result = await _httpClient.PostAsJsonAsync("api/identity/register", registerModel);
+		public async Task<RegisterResult> Register(RegisterModel registerModel)
+		{
+			var result = await _httpClient.PostAsJsonAsync("gateway/identity/register", registerModel);
 
-            RegisterResult registerResult = new RegisterResult();
+			RegisterResult registerResult = new RegisterResult();
 
-            registerResult.Successful = result.IsSuccessStatusCode;
+			registerResult.Successful = result.IsSuccessStatusCode;
 
-            if(!result.IsSuccessStatusCode) {
-                registerResult.Errors = new List<string>();
-                //TODO add errors
-            }
+			if (!result.IsSuccessStatusCode)
+			{
+				registerResult.Errors = new List<string>();
+				//TODO add errors
+			}
 
-            return registerResult;
-        }
+			return registerResult;
+		}
 
-        public async Task<LoginResult> Login(LoginModel loginModel)
-        {
-            var result = await _httpClient.PostAsJsonAsync("api/identity/login", loginModel);
+		public async Task<LoginResult> Login(LoginModel loginModel)
+		{
+			var result = await _httpClient.PostAsJsonAsync("gateway/identity/login", loginModel);
 
-            LoginResult loginResult = new LoginResult();
+			LoginResult loginResult = new LoginResult();
 
-            loginResult.Successful = result.IsSuccessStatusCode;
+			loginResult.Successful = result.IsSuccessStatusCode;
 
-            if(!result.IsSuccessStatusCode)
-            {
-                loginResult.Error = "Authentication was not successful";
-                return loginResult;
-            }
+			if (!result.IsSuccessStatusCode)
+			{
+				loginResult.Error = "Authentication was not successful";
+				return loginResult;
+			}
 
-            loginResult.Token = await result.Content.ReadAsStringAsync();
+			loginResult.Token = await result.Content.ReadAsStringAsync();
 
-            await _localStorageService.SetItemAsync("authToken", loginResult.Token);
+			await _localStorageService.SetItemAsync("authToken", loginResult.Token);
 
-            ((ApiAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(loginModel.Email);
-            _httpClient.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", loginResult.Token);
+			((ApiAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(loginModel.Email);
+			_httpClient.DefaultRequestHeaders.Authorization =
+				new AuthenticationHeaderValue("Bearer", loginResult.Token);
 
-            return loginResult;
-        }
+			return loginResult;
+		}
 
-        public async Task Logout()
-        {
-            await _localStorageService.RemoveItemAsync("authToken");
-            ((ApiAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsLoggedOut();
-            _httpClient.DefaultRequestHeaders.Authorization = null;
-        }
-    }
+		public async Task Logout()
+		{
+			await _localStorageService.RemoveItemAsync("authToken");
+			((ApiAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsLoggedOut();
+			_httpClient.DefaultRequestHeaders.Authorization = null;
+		}
+	}
 }

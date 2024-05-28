@@ -76,44 +76,50 @@ namespace BasketAPI.Controllers
             {
                 try
                 {
-                    var response = await httpClient.GetAsync($"http://localhost:5032/api/Movies/{movieId}");
+                    var response = await httpClient.GetAsync($"http://localhost:5003/gateway/Movies/titles/movies/search/title/{basketItem.Title}");
                     Console.WriteLine($"Received response: {(int)response.StatusCode} - {response.ReasonPhrase}");
 
                     if (response.IsSuccessStatusCode)
                     {
                         var content = await response.Content.ReadAsStringAsync();
-                        Console.WriteLine($"Movie details: {content}");
+                        Console.WriteLine($"Title details: {content}");
 
-                        var jsonContent = JsonConvert.DeserializeObject<JToken>(content);
+                        var jsonContent = JArray.Parse(content); // Parse the response as a JArray
 
-                        if (jsonContent == null)
+                        if (jsonContent == null || !jsonContent.Any())
                         {
-                            Console.WriteLine("Movie content is null.");
-                            return NotFound("Movie content is null.");
+                            response = await httpClient.GetAsync($"http://localhost:5003/gateway/Movies/titles/tv/search/title/{basketItem.Title}");
+                            content = await response.Content.ReadAsStringAsync();
+                            jsonContent = JArray.Parse(content);
                         }
 
-                        var stockQuantity = jsonContent["stock"].Value<decimal>();
-
-                        if (basketItem.Quantity <= stockQuantity)
+                        if (jsonContent == null || !jsonContent.Any())
                         {
-                            basketItem.MovieName = jsonContent["title"].Value<string>();
-                            basketItem.UnitPrice = jsonContent["price"].Value<decimal>();
-                            basketItem.MovieId = movieId;
-
-                            await _service.CreateAsync(basketItem);
-
-                            return CreatedAtAction("GetBasketItem", new { id = basketItem.Id }, basketItem);
+                            Console.WriteLine("Title content is null or empty.");
+                            return NotFound("Title content is null or empty.");
                         }
-                        else
+
+                        var firstItem = jsonContent.First;
+
+                        if (firstItem == null)
                         {
-                            Console.WriteLine("Insufficient stock quantity.");
-                            return BadRequest("Insufficient stock quantity.");
+                            Console.WriteLine("No items found in the response.");
+                            return NotFound("No items found in the response.");
                         }
+
+                        basketItem.PictureUri = firstItem["pictureUri"].Value<string>();
+                        basketItem.Title = firstItem["title"].Value<string>();
+                        basketItem.UnitPrice = firstItem["price"].Value<decimal>();
+                        basketItem.MovieId = movieId;
+
+                        await _service.CreateAsync(basketItem);
+
+                        return CreatedAtAction("GetBasketItem", new { id = basketItem.Id }, basketItem);
                     }
                     else
                     {
-                        Console.WriteLine($"Movie not found: {response.ReasonPhrase}");
-                        return NotFound("Movie not found.");
+                        Console.WriteLine($"Title not found: {response.ReasonPhrase}");
+                        return NotFound("Title not found.");
                     }
                 }
                 catch (HttpRequestException e)
@@ -133,6 +139,21 @@ namespace BasketAPI.Controllers
         {
             var basket = await _service.GetAsync(id);
             return basket != null;
+        }
+
+        // DELETE: api/BasketItems/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteBasketItem(string id)
+        {
+            var basketItem = await _service.GetAsync(id);
+            if (basketItem == null)
+            {
+                return NotFound();
+            }
+
+            await _service.RemoveAsync(id);
+
+            return NoContent();
         }
     }
 }

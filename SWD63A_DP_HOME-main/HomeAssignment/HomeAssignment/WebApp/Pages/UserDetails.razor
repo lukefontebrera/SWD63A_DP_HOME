@@ -1,0 +1,34 @@
+﻿@page "/userdetails"
+@using Microsoft.AspNetCore.Components.Authorization
+@using WebApp.Services
+@using SharedModels.Models
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject UserService UserService
+
+<h3>User Details</h3>
+
+@if (User != null)
+{
+    <p>Email: @User.Email</p>
+}
+else
+{
+    <p>User not found.</p>
+}
+
+@code {
+    private UserDTO User;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authenticationState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            // Retrieve user details from the service based on the user's identity (email)
+            var email = user.Identity.Name;
+            User = await UserService.GetUserByEmailAsync(email);
+        }
+    }
+}

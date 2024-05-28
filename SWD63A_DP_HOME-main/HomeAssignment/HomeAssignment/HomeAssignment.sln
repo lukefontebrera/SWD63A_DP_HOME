@@ -19,6 +19,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedModels", "SharedModel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WishlistAPI", "WishlistAPI\WishlistAPI.csproj", "{9E9BACAE-7E3F-4A8C-8B92-58053A1DA625}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentAPI", "PaymentAPI\PaymentAPI.csproj", "{E891CB96-3699-4FF6-95DA-F126724A70CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{9E9BACAE-7E3F-4A8C-8B92-58053A1DA625}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E9BACAE-7E3F-4A8C-8B92-58053A1DA625}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E9BACAE-7E3F-4A8C-8B92-58053A1DA625}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E891CB96-3699-4FF6-95DA-F126724A70CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E891CB96-3699-4FF6-95DA-F126724A70CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E891CB96-3699-4FF6-95DA-F126724A70CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E891CB96-3699-4FF6-95DA-F126724A70CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -30,6 +30,7 @@ namespace CatalogAPI.Services
                     {
                         if (movie != null)
                         {
+                            string id = (string)movie["_id"];
                             string title = movie["titleText"]?["text"]?.Value<string>() ?? "No Title";
                             string description = movie["originalTitleText"]?["text"]?.Value<string>() ?? "No Description";
                             string pictureUri = null;
@@ -55,6 +56,7 @@ namespace CatalogAPI.Services
 
                             movies.Add(new Movie
                             {
+                                Id = id,
                                 Title = title,
                                 Description = description,
                                 PictureUri = pictureUri,
@@ -100,6 +102,7 @@ namespace CatalogAPI.Services
                     {
                         if (movie != null)
                         {
+                            string id = (string)movie["_id"];
                             string title = movie["titleText"]?["text"]?.Value<string>() ?? "No Title";
                             string description = movie["originalTitleText"]?["text"]?.Value<string>() ?? "No Description";
                             string pictureUri = movie["primaryImage"]?["url"]?.Value<string>() ?? "No Picture";
@@ -123,6 +126,7 @@ namespace CatalogAPI.Services
 
                             movies.Add(new Movie
                             {
+                                Id = id,
                                 Title = title,
                                 Description = description,
                                 Caption = $"{captionPlainText} ({captionTypeName})",
@@ -168,6 +172,7 @@ namespace CatalogAPI.Services
                     {
                         if (movie != null)
                         {
+                            string id = (string)movie["_id"];
                             string title = movie["titleText"]?["text"]?.Value<string>() ?? "No Title";
                             string description = movie["originalTitleText"]?["text"]?.Value<string>() ?? "No Description";
                             string pictureUri = null;
@@ -193,6 +198,7 @@ namespace CatalogAPI.Services
 
                             movies.Add(new Movie
                             {
+                                Id = id,
                                 Title = title,
                                 Description = description,
                                 PictureUri = pictureUri,
@@ -238,6 +244,7 @@ namespace CatalogAPI.Services
                     {
                         if (movie != null)
                         {
+                            string id = (string)movie["_id"];
                             string title = movie["titleText"]?["text"]?.Value<string>() ?? "No Title";
                             string description = movie["originalTitleText"]?["text"]?.Value<string>() ?? "No Description";
                             string pictureUri = movie["primaryImage"]?["url"]?.Value<string>() ?? "No Picture";
@@ -261,6 +268,7 @@ namespace CatalogAPI.Services
 
                             movies.Add(new Movie
                             {
+                                Id = id,
                                 Title = title,
                                 Description = description,
                                 Caption = $"{captionPlainText} ({captionTypeName})",
