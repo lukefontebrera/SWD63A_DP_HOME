@@ -14,13 +14,25 @@ namespace WebApp.Pages
 
         public IEnumerable<MovieDTO> Movies { get; set; }
 
-        protected string Genre { get; set; } = "Action";
+        protected string Genre { get; set; }
 
         protected string MovieName { get; set; }
 
         protected async Task LoadMoviesByGenre()
         {
-            Movies = await MovieService.GetMoviesByGenre(Genre);
+            if (!string.IsNullOrEmpty(Genre))
+            {
+                try
+                {
+                    Movies = await MovieService.GetMoviesByGenre(Genre);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error loading movies by genre: {ex.Message}");
+
+                    Movies = null;
+                }
+            }
         }
 
         protected async Task LoadMoviesByName()
@@ -33,11 +45,43 @@ namespace WebApp.Pages
                 }
                 catch (Exception ex)
                 {
-                    // Handle exception
                     Console.WriteLine($"Error loading movies by name: {ex.Message}");
 
-                    // Reset the Movies property to null or an empty collection
-                    Movies = null; // or Movies = Enumerable.Empty<MovieDTO>();
+                    Movies = null;
+                }
+            }
+        }
+
+        protected async Task LoadTVByGenre()
+        {
+            if (!string.IsNullOrEmpty(Genre))
+            {
+                try
+                {
+                    Movies = await MovieService.GetTVShowByGenre(Genre);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error loading movies by genre: {ex.Message}");
+
+                    Movies = null;
+                }
+            }
+        }
+
+        protected async Task LoadTVByName()
+        {
+            if (!string.IsNullOrEmpty(MovieName))
+            {
+                try
+                {
+                    Movies = await MovieService.GetTVByName(MovieName);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error loading movies by name: {ex.Message}");
+
+                    Movies = null;
                 }
             }
         }

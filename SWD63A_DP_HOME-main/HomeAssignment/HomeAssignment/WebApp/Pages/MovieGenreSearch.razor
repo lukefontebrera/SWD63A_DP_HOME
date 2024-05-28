@@ -1,10 +1,10 @@
-﻿@page "/genresearch"
+﻿@page "/genremoviesearch"
 @using SharedModels.Models
 @inherits MovieBase
 
 <h3>Enter Genre:</h3>
 <input @bind="Genre" />
-<button @onclick="LoadMovies">Load Movies</button>
+<button @onclick="LoadMoviesByGenre">Load Movies</button>
 
 @if (Movies == null)
 {
@@ -21,12 +21,11 @@ else
         const int moviesPerRow = 3;
         var moviesRowList = new List<MovieDTO>();
 
-        @for (int i = 0; i < moviesCount; i++)
+        @for (int i = 0; i < moviesCount; i += moviesPerRow)
         {
-            moviesRowList = Movies.Skip(i * moviesPerRow).Take(moviesPerRow).ToList();
+            moviesRowList = Movies.Skip(i).Take(moviesPerRow).ToList();
 
             <div class="row mt-3">
-
                 @foreach (var item in moviesRowList)
                 {
                     <div class="col-md-3 mb-2">
@@ -57,18 +56,14 @@ else
                             </div>
                         </a>
                     </div>
-
                 }
-
             </div>
         }
     }
 }
 
 @code {
-    private string Genre { get; set; } = "Action";
-
-    private async Task LoadMovies()
+    private async Task LoadMoviesByGenre()
     {
         Movies = await MovieService.GetMoviesByGenre(Genre);
     }

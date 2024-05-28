@@ -1,0 +1,80 @@
+﻿@page "/genretvsearch"
+@using SharedModels.Models
+@inherits MovieBase
+
+<h3>Enter TV Genre:</h3>
+<input @bind="Genre" />
+<button @onclick="LoadTVByGenre">Load TV Shows</button>
+
+@if (Movies == null)
+{
+    <h3>Loading TV Shows...</h3>
+}
+else
+{
+    <h3 class="mb-5">TV Shows</h3>
+
+    var moviesCount = Movies.Count();
+
+    @if (moviesCount > 0)
+    {
+        const int moviesPerRow = 3;
+        var moviesRowList = new List<MovieDTO>();
+
+        @for (int i = 0; i < moviesCount; i += moviesPerRow)
+        {
+            moviesRowList = Movies.Skip(i).Take(moviesPerRow).ToList();
+
+            <div class="row mt-3">
+                @foreach (var item in moviesRowList)
+                {
+                    <div class="col-md-3 mb-2">
+                        <a href="#">
+                            <div class="card" style="width: 300px; height: 600px;">
+                                @if (!string.IsNullOrEmpty(item.PictureUri))
+                                {
+                                    <img class="img-thumbnail" src="@item.PictureUri" alt="Movie Poster" />
+                                }
+                                else
+                                {
+                                    <div class="text-center" style="height: 150px; display: flex; align-items: center; justify-content: center;">
+                                        <img class="img-thumbnail" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 100 150'%3E%3Crect width='100%' height='100%' fill='black'/%3E%3Ctext x='10' y='50' fill='white'%3EImage not available%3C/text%3E%3C/svg%3E" alt="Image not available" />
+                                    </div>
+                                }
+                                <div class="card-body">
+                                    <h5 class="card-title mb-3">
+                                        @item.Title
+                                    </h5>
+                                    <p class="card-text">
+                                        <b>$@item.Price.ToString()</b>
+                                    </p>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-primary" @onclick="()=>OrderMovie(item.Id)">Order</button>
+                                        <button type="button" class="btn btn-secondary" @onclick="()=>AddToWatchList(item.Id)">Add to WatchList</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+    }
+}
+
+@code {
+    private async Task LoadTVByGenre()
+    {
+        Movies = await MovieService.GetTVShowByGenre(Genre);
+    }
+
+    private void OrderMovie(string movieId)
+    {
+        // Implement ordering logic here
+    }
+
+    private void AddToWatchList(string movieId)
+    {
+        // Implement adding to watchlist logic here
+    }
+}

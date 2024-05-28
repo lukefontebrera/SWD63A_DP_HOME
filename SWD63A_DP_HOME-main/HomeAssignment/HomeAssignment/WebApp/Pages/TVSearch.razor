@@ -1,18 +1,18 @@
-﻿@page "/moviesearch"
+﻿@page "/tvsearch"
 @using SharedModels.Models
 @inherits MovieBase
 
-<h3>Enter Movie Name:</h3>
+<h3>Enter TV Show Name:</h3>
 <input @bind="MovieName" />
-<button @onclick="LoadMoviesByName">Search Movies</button>
+<button @onclick="LoadTVByName">Search TV Shows</button>
 
 @if (Movies == null)
 {
-    <h3>Loading Movies...</h3>
+    <h3>Loading TV Shows...</h3>
 }
 else
 {
-    <h3 class="mb-5">Movies</h3>
+    <h3 class="mb-5">TV Shows</h3>
 
     var moviesCount = Movies.Count();
 
