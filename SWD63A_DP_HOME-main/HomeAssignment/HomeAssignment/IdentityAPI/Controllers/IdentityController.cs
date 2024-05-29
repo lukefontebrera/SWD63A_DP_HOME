@@ -24,32 +24,37 @@ namespace IdentityAPI.Controllers
 			_logger = logger;
 		}
 
-		[HttpPost("register")]
-		public async Task<ActionResult> Register([FromBody] UserDTO userDTO)
-		{
-			try
-			{
-				var u = await _context.GetByEmailAsync(userDTO.Email);
+        [HttpPost("register")]
+        public async Task<ActionResult> Register([FromBody] UserDTO userDTO)
+        {
+            try
+            {
+                var u = await _context.GetByEmailAsync(userDTO.Email);
 
-				if (u != null)
-				{
-					return BadRequest("User already exists");
-				}
+                if (u != null)
+                {
+                    return BadRequest("User already exists");
+                }
 
-				var user = new User();
-				user.SetPassword(userDTO.Password, _encryptor);
-				user.Email = userDTO.Email;
+                var user = new User
+                {
+                    Email = userDTO.Email,
+                    FirstName = userDTO.FirstName,
+                    LastName = userDTO.LastName
+                };
+                user.SetPassword(userDTO.Password, _encryptor);
 
-				await _context.CreateAsync(user);
+                await _context.CreateAsync(user);
 
-				return Ok();
-			}
-			catch (Exception ex)
-			{
-				_logger.LogError(ex, "Error occurred during registration.");
-				return StatusCode(500, "Internal server error");
-			}
-		}
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred during registration.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
 
 		[HttpPost("login")]
 		public async Task<ActionResult> Login([FromBody] UserDTO userDTO)
@@ -68,13 +73,13 @@ namespace IdentityAPI.Controllers
 
 				var isValid = u.ValidatePassword(userDTO.Password, _encryptor);
 
-                if (isValid)
-                {
-                    var token = _jwtBuilder.GetToken(u.Id, u.Email);
-                    _logger.LogInformation($"Login successful for email: {userDTO.Email}");
-                    return Ok(token);
-                }
-                else
+				if (isValid)
+				{
+					var token = _jwtBuilder.GetToken(u.Id, u.Email);
+					_logger.LogInformation($"Login successful for email: {userDTO.Email}");
+					return Ok(token);
+				}
+				else
 				{
 					_logger.LogWarning($"Invalid password for email: {userDTO.Email}");
 					return BadRequest("Could not authenticate user");
@@ -87,9 +92,10 @@ namespace IdentityAPI.Controllers
 			}
 		}
 
-        [HttpGet("validate")]
+
+		[HttpGet("validate")]
         public async Task<ActionResult> Validate([FromQuery(Name = "email")] string email,
-    [FromQuery(Name = "token")] string token)
+                                         [FromQuery(Name = "token")] string token)
         {
             try
             {
@@ -100,7 +106,6 @@ namespace IdentityAPI.Controllers
                     return NotFound("User not found");
                 }
 
-                // Declare an out variable for email
                 var userId = _jwtBuilder.ValidateToken(token, out var tokenEmail);
 
                 if (userId != u.Id || tokenEmail.ToLowerInvariant() != email.ToLowerInvariant())
@@ -118,6 +123,7 @@ namespace IdentityAPI.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
 
 
         [HttpGet("user")]

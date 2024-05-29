@@ -12,26 +12,27 @@ public class JwtMiddleware : IMiddleware
     {
         _jwtBuilder = jwtBuilder;
     }
-    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
-    {
-        var bearer = context.Request.Headers["Authorization"].ToString();
-        var token = bearer.Replace("Bearer ", string.Empty);
+	public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+	{
+		var bearer = context.Request.Headers["Authorization"].ToString();
+		var token = bearer.Replace("Bearer ", string.Empty);
 
-        if (!string.IsNullOrEmpty(token))
-        {
-            var userId = _jwtBuilder.ValidateToken(token, out var email);
+		if (!string.IsNullOrEmpty(token))
+		{
+			var userId = _jwtBuilder.ValidateToken(token, out var email);
 
-            if (ObjectId.TryParse(userId, out _))
-            {
-                context.Items["userId"] = userId;
-                context.Items["email"] = email;
-            }
-            else
-            {
-                context.Response.StatusCode = 401;
-            }
-        }
+			if (ObjectId.TryParse(userId, out _))
+			{
+				context.Items["userId"] = userId;
+				context.Items["email"] = email;
+			}
+			else
+			{
+				context.Response.StatusCode = 401;
+			}
+		}
 
-        await next(context);
-    }
+		await next(context);
+	}
+
 }
