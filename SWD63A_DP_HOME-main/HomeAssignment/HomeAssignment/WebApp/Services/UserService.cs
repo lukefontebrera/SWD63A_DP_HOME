@@ -12,12 +12,12 @@ namespace WebApp.Services
 			_httpClient = httpClient;
 		}
 
-		public async Task<UserDTO> GetUserByEmailAsync(string email)
-		{
-			var response = await _httpClient.GetAsync($"gateway/identity/user?email={email}");
-			response.EnsureSuccessStatusCode();
+        public async Task<UserDTO> GetUserByEmailAsync(string email)
+        {
+            var response = await _httpClient.GetAsync($"gateway/identity/user?email={email}");
+            response.EnsureSuccessStatusCode();
 
-			return await response.Content.ReadFromJsonAsync<UserDTO>();
-		}
-	}
+            return await response.Content.ReadFromJsonAsync<UserDTO>();
+        }
+    }
 }

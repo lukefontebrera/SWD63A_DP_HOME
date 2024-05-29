@@ -17,14 +17,15 @@ public class JwtBuilder: IJwtBuilder
         _options = options.Value;
     }
 
-	public string GetToken(string userId)
+    public string GetToken(string userId, string email)
     {
         var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.Secret));
         var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
         var claims = new[]
         {
-            new Claim("userId", userId)
-        };
+        new Claim("userId", userId),
+        new Claim(ClaimTypes.Email, email) // Add email claim
+    };
         var expirationDate = DateTime.Now.AddMinutes(_options.ExpiryMinutes);
         var jwt = new JwtSecurityToken(claims: claims, signingCredentials: signingCredentials, expires: expirationDate);
         var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
@@ -32,9 +33,10 @@ public class JwtBuilder: IJwtBuilder
         return encodedJwt;
     }
 
-    public string ValidateToken(string token)
+    public string ValidateToken(string token, out string email)
     {
         var principal = GetPrincipal(token);
+        email = string.Empty;
         if (principal == null)
         {
             return string.Empty;
@@ -50,10 +52,12 @@ public class JwtBuilder: IJwtBuilder
             return string.Empty;
         }
         var userIdClaim = identity?.FindFirst("userId");
-        if (userIdClaim == null)
+        var emailClaim = identity?.FindFirst(ClaimTypes.Email);
+        if (userIdClaim == null || emailClaim == null)
         {
             return string.Empty;
         }
+        email = emailClaim.Value;
         var userId = userIdClaim.Value;
         return userId;
     }

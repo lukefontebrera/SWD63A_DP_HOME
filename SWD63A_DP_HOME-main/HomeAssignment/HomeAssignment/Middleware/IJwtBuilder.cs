@@ -2,6 +2,6 @@
 
 public interface IJwtBuilder
 {
-    string GetToken(string userId);
-    string ValidateToken(string token);
+    string GetToken(string userId, string email);
+    string ValidateToken(string token, out string email);
 }

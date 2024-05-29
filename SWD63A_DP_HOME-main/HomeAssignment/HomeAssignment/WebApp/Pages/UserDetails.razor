@@ -4,6 +4,7 @@
 @using SharedModels.Models
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject UserService UserService
+@using System.Security.Claims
 
 <h3>User Details</h3>
 
@@ -26,9 +27,12 @@ else
 
         if (user.Identity.IsAuthenticated)
         {
-            // Retrieve user details from the service based on the user's identity (email)
-            var email = user.Identity.Name;
-            User = await UserService.GetUserByEmailAsync(email);
+            var emailClaim = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
+            if (emailClaim != null)
+            {
+                var email = emailClaim.Value;
+                User = await UserService.GetUserByEmailAsync(email);
+            }
         }
     }
 }

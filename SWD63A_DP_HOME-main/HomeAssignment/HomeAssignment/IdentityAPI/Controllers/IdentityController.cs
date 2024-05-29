@@ -68,13 +68,13 @@ namespace IdentityAPI.Controllers
 
 				var isValid = u.ValidatePassword(userDTO.Password, _encryptor);
 
-				if (isValid)
-				{
-					var token = _jwtBuilder.GetToken(u.Id);
-					_logger.LogInformation($"Login successful for email: {userDTO.Email}");
-					return Ok(token);
-				}
-				else
+                if (isValid)
+                {
+                    var token = _jwtBuilder.GetToken(u.Id, u.Email);
+                    _logger.LogInformation($"Login successful for email: {userDTO.Email}");
+                    return Ok(token);
+                }
+                else
 				{
 					_logger.LogWarning($"Invalid password for email: {userDTO.Email}");
 					return BadRequest("Could not authenticate user");
@@ -87,38 +87,40 @@ namespace IdentityAPI.Controllers
 			}
 		}
 
-		[HttpGet("validate")]
-		public async Task<ActionResult> Validate([FromQuery(Name = "email")] string email,
-			[FromQuery(Name = "token")] string token)
-		{
-			try
-			{
-				var u = await _context.GetByEmailAsync(email.ToLowerInvariant());
+        [HttpGet("validate")]
+        public async Task<ActionResult> Validate([FromQuery(Name = "email")] string email,
+    [FromQuery(Name = "token")] string token)
+        {
+            try
+            {
+                var u = await _context.GetByEmailAsync(email.ToLowerInvariant());
 
-				if (u == null)
-				{
-					return NotFound("User not found");
-				}
+                if (u == null)
+                {
+                    return NotFound("User not found");
+                }
 
-				var userId = _jwtBuilder.ValidateToken(token);
+                // Declare an out variable for email
+                var userId = _jwtBuilder.ValidateToken(token, out var tokenEmail);
 
-				if (userId != u.Id)
-				{
-					return BadRequest("Invalid Token");
-				}
-				else
-				{
-					return Ok(userId);
-				}
-			}
-			catch (Exception ex)
-			{
-				_logger.LogError(ex, "Error occurred during token validation.");
-				return StatusCode(500, "Internal server error");
-			}
-		}
+                if (userId != u.Id || tokenEmail.ToLowerInvariant() != email.ToLowerInvariant())
+                {
+                    return BadRequest("Invalid Token");
+                }
+                else
+                {
+                    return Ok(userId);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred during token validation.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
 
-		[HttpGet("user")]
+
+        [HttpGet("user")]
 		public async Task<ActionResult<User>> GetUserByEmail([FromQuery] string email)
 		{
 			var user = await _context.GetByEmailAsync(email);
