@@ -1,0 +1,45 @@
+﻿@page "/paymentsHistory"
+
+@using SharedModels.Models
+@using WebApp.Services
+
+<h3>Payments</h3>
+
+@if (Payments != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Date & Time</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var payment in Payments)
+            {
+                <tr>
+                    <td>@payment.Id</td>
+                    <td>@payment.Timestamp</td>
+                    <td>@payment.Amount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No payments found.</p>
+}
+
+@code {
+    [Inject]
+    public IPaymentService PaymentService { get; set; }
+
+    IEnumerable<PaymentDTO> Payments { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Payments = await PaymentService.GetItems();
+    }
+}
