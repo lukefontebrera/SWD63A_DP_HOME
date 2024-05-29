@@ -12,6 +12,6 @@ namespace SharedModels.Models
 
         public DateTime Timestamp { get; set; }
 
-        public string[] MovieIds { get; set; }
+        public BasketItemDTO[] Movies { get; set; }
     }
 }

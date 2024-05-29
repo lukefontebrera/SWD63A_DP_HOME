@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
+using SharedModels.Models;
 
 namespace BasketAPI.Models
 {
@@ -13,6 +14,6 @@ namespace BasketAPI.Models
 
         public DateTime Timestamp { get; set; }
 
-        public string[] MovieIds { get; set; }
+        public BasketItemDTO[] Movies { get; set; }
     }
 }

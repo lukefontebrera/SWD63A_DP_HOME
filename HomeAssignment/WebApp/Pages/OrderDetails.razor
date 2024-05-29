@@ -13,9 +13,13 @@
         <p>Date & Time: @Order.Timestamp</p>
         <h4>Ordered Movies:</h4>
         <ul>
-            @foreach (var movieId in Order.MovieIds)
+            @foreach (var movie in Order.Movies)
             {
-                <li>@movieId</li>
+                <li>
+                    <p>Title: @movie.Title</p>
+                    <p>Price: $@movie.UnitPrice</p>
+                    <img src="@movie.PictureUri" alt="@movie.Title" style="max-width: 100px;" />
+                </li>
             }
         </ul>
     </div>

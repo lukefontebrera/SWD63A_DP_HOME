@@ -4,6 +4,7 @@
 @inherits PaymentBase
 @inject IBasketService BasketService
 @inject IOrderService OrderService
+@inject IPaymentService PaymentService
 @inject NavigationManager Navigation
 
 <h3 class="mb-5">Payment</h3>
@@ -59,7 +60,6 @@ else
 
 @code {
     private IEnumerable<BasketItemDTO> BasketItems { get; set; }
-    private IEnumerable<OrderDTO> Order { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -71,24 +71,23 @@ else
     {
         BasketItems = await BasketService.GetItems();
 
-        decimal amount = BasketItems.Count() * 10;
+        decimal amount = BasketItems.Sum(item => item.UnitPrice);
         DateTime timestamp = DateTime.Now;
-        string[] movieIds = BasketItems.Select(item => item.MovieId).ToArray();
 
         PaymentDTO payment = new PaymentDTO
             {
-                Id = "123", //Dummy Data, will be filled in properly later as did not manage to make it work without
+                Id = "123", // Dummy Data, will be filled in properly later
                 Amount = amount,
                 Timestamp = timestamp,
-                MovieIds = movieIds
+                MovieIds = BasketItems.Select(item => item.MovieId).ToArray()
             };
 
         OrderDTO order = new OrderDTO
             {
-                Id = "123", //Dummy Data, will be filled in properly later as did not manage to make it work without
+                Id = Guid.NewGuid().ToString(),
                 Amount = amount,
                 Timestamp = timestamp,
-                MovieIds = movieIds
+                Movies = BasketItems.ToArray()
             };
 
         await PaymentService.AddPayment(payment);

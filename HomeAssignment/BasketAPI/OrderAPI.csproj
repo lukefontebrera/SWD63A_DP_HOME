@@ -21,4 +21,6 @@
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
+  <Import Project="..\SharedModels\SharedModels.projitems" Label="Shared" />
+
 </Project>
