@@ -107,7 +107,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5031 // Update to the port where your Basket API is running
+          "Port": 5031 
         }
       ]
     },
@@ -119,7 +119,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5031 // Update to the port where your Basket API is running
+          "Port": 5031 
         }
       ]
     },
@@ -131,7 +131,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5258 // Update to the port where your Basket API is running
+          "Port": 5258 
         }
       ]
     },
@@ -143,7 +143,31 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5258 // Update to the port where your Basket API is running
+          "Port": 5258 
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/WishedMovies",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/api/WishedMovies",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5028 
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/WishedMovies/{id}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ],
+      "DownstreamPathTemplate": "/api/WishedMovies/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5028 
         }
       ]
     }

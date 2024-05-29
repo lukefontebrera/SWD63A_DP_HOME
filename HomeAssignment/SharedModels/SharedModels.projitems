@@ -13,5 +13,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\MovieDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\PaymentDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\UserDTO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\WishDTO.cs" />
   </ItemGroup>
 </Project>

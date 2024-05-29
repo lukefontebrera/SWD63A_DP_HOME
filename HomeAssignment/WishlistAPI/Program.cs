@@ -1,13 +1,18 @@
 using Microsoft.EntityFrameworkCore;
 using WishlistAPI.Models;
+using WishlistAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.Configure<DatabaseSettings>(
+    builder.Configuration.GetSection("SWD63ADPHOME"));
+
+builder.Services.AddSingleton<WishService>();
+
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<WishListContext>(opt => opt.UseInMemoryDatabase("WishedMoviesList"));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -20,6 +25,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(policy => policy.WithOrigins("http://localhost:5070")
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+);
 
 app.UseHttpsRedirection();
 

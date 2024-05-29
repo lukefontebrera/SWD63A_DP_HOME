@@ -72,6 +72,9 @@ else
     [Inject]
     public IBasketService BasketService { get; set; }
 
+    [Inject]
+    public IWishService WishService { get; set; }
+
     private async Task OrderMovie(string movieId)
     {
         var movie = Movies.FirstOrDefault(m => m.Id == movieId);
@@ -89,8 +92,19 @@ else
         }
     }
 
-    private void AddToWatchList(string movieId)
+    private async Task AddToWatchList(string movieId)
     {
-        // Implement adding to watchlist logic here
+        var movie = Movies.FirstOrDefault(m => m.Id == movieId);
+        if (movie != null)
+        {
+            var wishedItem = new WishDTO
+                {
+                    PictureUri = movie.PictureUri,
+                    MovieId = movie.Id,
+                    Title = movie.Title,
+                };
+
+            await WishService.AddToBasket(wishedItem);
+        }
     }
 }
