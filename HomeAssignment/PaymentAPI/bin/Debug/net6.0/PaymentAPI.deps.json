@@ -8,13 +8,13 @@
     ".NETCoreApp,Version=v6.0": {
       "PaymentAPI/1.0.0": {
         "dependencies": {
-          "BasketAPI": "1.0.0",
           "Microsoft.EntityFrameworkCore": "6.0.29",
           "Microsoft.EntityFrameworkCore.InMemory": "6.0.27",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.29",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.29",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.16",
           "MongoDB.Driver": "2.25.0",
+          "OrderAPI": "1.0.0",
           "Swashbuckle.AspNetCore": "6.2.3"
         },
         "runtime": {
@@ -2657,7 +2657,7 @@
           }
         }
       },
-      "BasketAPI/1.0.0": {
+      "OrderAPI/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.InMemory": "6.0.27",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.29",
@@ -2667,7 +2667,7 @@
           "Swashbuckle.AspNetCore": "6.2.3"
         },
         "runtime": {
-          "BasketAPI.dll": {}
+          "OrderAPI.dll": {}
         }
       }
     }
@@ -4309,7 +4309,7 @@
       "path": "zstdsharp.port/0.7.3",
       "hashPath": "zstdsharp.port.0.7.3.nupkg.sha512"
     },
-    "BasketAPI/1.0.0": {
+    "OrderAPI/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

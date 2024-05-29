@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Models\BasketItemDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\MovieDTO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\OrderDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\PaymentDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\UserDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\WishDTO.cs" />

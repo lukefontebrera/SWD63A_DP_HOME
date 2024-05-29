@@ -1,0 +1,38 @@
+﻿@page "/orderDetails/{OrderId}"
+@using SharedModels.Models
+@using WebApp.Services
+@inject IOrderService OrderService
+
+<h3>Order Details</h3>
+
+@if (Order != null)
+{
+    <div>
+        <p>Order ID: @Order.Id</p>
+        <p>Amount: @Order.Amount</p>
+        <p>Date & Time: @Order.Timestamp</p>
+        <h4>Ordered Movies:</h4>
+        <ul>
+            @foreach (var movieId in Order.MovieIds)
+            {
+                <li>@movieId</li>
+            }
+        </ul>
+    </div>
+}
+else
+{
+    <p>Loading order details...</p>
+}
+
+@code {
+    [Parameter]
+    public string OrderId { get; set; }
+
+    public OrderDTO Order { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Order = await OrderService.GetItem(OrderId);
+    }
+}

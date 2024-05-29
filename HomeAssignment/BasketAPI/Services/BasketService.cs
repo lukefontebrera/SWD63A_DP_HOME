@@ -9,7 +9,7 @@ namespace BasketAPI.Services
         private readonly IMongoCollection<BasketItem> _basketCollection;
 
         public BasketService(
-            IOptions<DatabaseSettings> basketDatabaseSettings)
+            IOptions<BasketDatabaseSettings> basketDatabaseSettings)
         {
             var mongoClient = new MongoClient(
                 basketDatabaseSettings.Value.ConnectionString);
@@ -18,7 +18,7 @@ namespace BasketAPI.Services
                 basketDatabaseSettings.Value.DatabaseName);
 
             _basketCollection = mongoDatabase.GetCollection<BasketItem>(
-                basketDatabaseSettings.Value.BasketCollectionName);
+                basketDatabaseSettings.Value.CollectionName);
         }
 
         public async Task<List<BasketItem>> GetAsync() =>

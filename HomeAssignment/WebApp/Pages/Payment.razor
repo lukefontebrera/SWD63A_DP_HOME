@@ -3,6 +3,7 @@
 @using WebApp.Services
 @inherits PaymentBase
 @inject IBasketService BasketService
+@inject IOrderService OrderService
 @inject NavigationManager Navigation
 
 <h3 class="mb-5">Payment</h3>
@@ -58,6 +59,7 @@ else
 
 @code {
     private IEnumerable<BasketItemDTO> BasketItems { get; set; }
+    private IEnumerable<OrderDTO> Order { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -75,15 +77,23 @@ else
 
         PaymentDTO payment = new PaymentDTO
             {
-                Id = "123",
+                Id = "123", //Dummy Data, will be filled in properly later as did not manage to make it work without
+                Amount = amount,
+                Timestamp = timestamp,
+                MovieIds = movieIds
+            };
+
+        OrderDTO order = new OrderDTO
+            {
+                Id = "123", //Dummy Data, will be filled in properly later as did not manage to make it work without
                 Amount = amount,
                 Timestamp = timestamp,
                 MovieIds = movieIds
             };
 
         await PaymentService.AddPayment(payment);
+        await OrderService.AddOrder(order);
 
-        // Navigate to order confirmation page
-        Navigation.NavigateTo("/");
+        Navigation.NavigateTo("/orderHistory");
     }
 }

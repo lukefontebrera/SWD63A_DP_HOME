@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "BasketAPI": {
+    "OrderAPI": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

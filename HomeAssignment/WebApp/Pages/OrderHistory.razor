@@ -1,0 +1,53 @@
+﻿@page "/orderHistory"
+
+@using SharedModels.Models
+@using WebApp.Services
+@inject NavigationManager Navigation
+
+<h3>Order History</h3>
+
+@if (Orders != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Date & Time</th>
+                <th>See Ordered Items</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Orders)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.Timestamp</td>
+                    <td>
+                        <button @onclick="() => ShowOrderDetails(order.Id)">Details</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No orders found.</p>
+}
+
+@code {
+    [Inject]
+    public IOrderService OrderService { get; set; }
+
+    IEnumerable<OrderDTO> Orders { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Orders = await OrderService.GetItems();
+    }
+
+    private void ShowOrderDetails(string orderId)
+    {
+        Navigation.NavigateTo($"/orderDetails/{orderId}");
+    }
+}

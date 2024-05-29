@@ -1,11 +1,11 @@
 ﻿namespace BasketAPI.Models
 {
-    public class DatabaseSettings
+    public class OrderDatabaseSettings
     {
         public string ConnectionString { get; set; } = null!;
 
         public string DatabaseName { get; set; } = null!;
 
-        public string BasketCollectionName { get; set; } = null!;
+        public string CollectionName { get; set; } = null!;
     }
 }

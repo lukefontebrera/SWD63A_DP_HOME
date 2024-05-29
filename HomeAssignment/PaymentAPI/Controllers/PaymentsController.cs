@@ -64,29 +64,7 @@ namespace PaymentAPI.Controllers
                         payment.Id = GenerateId();
                         await _service.CreateAsync(payment);
 
-                        // Retrieve basket items
-                        var basketItemsResponse = await httpClient.GetAsync($"http://localhost:5003/gateway/BasketItems");
-                        if (basketItemsResponse.IsSuccessStatusCode)
-                        {
-                            var content = await basketItemsResponse.Content.ReadAsStringAsync();
-                            var basketItems = JsonConvert.DeserializeObject<List<BasketItem>>(content);
-
-                            // Delete each basket item
-                            foreach (var basketItem in basketItems)
-                            {
-                                var deleteResponse = await httpClient.DeleteAsync($"http://localhost:5003/gateway/BasketItems/{basketItem.Id}");
-                                if (!deleteResponse.IsSuccessStatusCode)
-                                {
-                                    Console.WriteLine($"Failed to delete basket item {basketItem.Id}: {deleteResponse.ReasonPhrase}");
-                                    // Handle failure to delete basket item
-                                }
-                            }
-                        }
-                        else
-                        {
-                            // Handle unsuccessful response
-                            Console.WriteLine($"Failed to fetch basket items: {basketItemsResponse.ReasonPhrase}");
-                        }
+                        // Delete of BasketItems is handled in Order instead
 
                         return Ok();
                     }

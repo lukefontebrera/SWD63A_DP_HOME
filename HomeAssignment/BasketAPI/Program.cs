@@ -1,14 +1,18 @@
 using BasketAPI.Models;
 using BasketAPI.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.Configure<BasketDatabaseSettings>(
+    builder.Configuration.GetSection("BasketDatabaseSettings"));
 
-builder.Services.Configure<DatabaseSettings>(
-    builder.Configuration.GetSection("SWD63ADPHOME"));
+builder.Services.Configure<OrderDatabaseSettings>(
+    builder.Configuration.GetSection("OrderDatabaseSettings"));
 
 builder.Services.AddSingleton<BasketService>();
+builder.Services.AddSingleton<OrderService>();
 
 builder.Services.AddControllers();
 
