@@ -2,6 +2,9 @@
 @using SharedModels.Models
 @inherits MovieBase
 @using WebApp.Services
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject UserService UserService
+@using System.Security.Claims
 
 <h3>Enter Movie Name:</h3>
 <input @bind="MovieName" />
@@ -39,7 +42,7 @@ else
                                         @item.Title
                                     </h5>
                                     <p class="card-text">
-                                        <b>$@item.Price.ToString()</b>
+                                        <b>EUR @item.Price.ToString()</b>
                                     </p>
                                     <p class="card-text">
                                         <b>Description:</b> @item.Description
@@ -77,8 +80,23 @@ else
     [Inject]
     public IWishService WishService { get; set; }
 
+    private UserDTO User;
+
     private async Task OrderMovie(string movieId)
     {
+        var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authenticationState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            var emailClaim = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
+            if (emailClaim != null)
+            {
+                var email = emailClaim.Value;
+                User = await UserService.GetUserByEmailAsync(email);
+            }
+        }
+
         var movie = Movies.FirstOrDefault(m => m.Id == movieId);
         if (movie != null)
         {
@@ -87,7 +105,8 @@ else
                     PictureUri = movie.PictureUri,
                     MovieId = movie.Id,
                     Title = movie.Title,
-                    UnitPrice = movie.Price
+                    UnitPrice = movie.Price,
+                    User = User.Email
                 };
 
             await BasketService.AddToBasket(basketItem);
@@ -96,6 +115,20 @@ else
 
     private async Task AddToWatchList(string movieId)
     {
+
+        var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authenticationState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            var emailClaim = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
+            if (emailClaim != null)
+            {
+                var email = emailClaim.Value;
+                User = await UserService.GetUserByEmailAsync(email);
+            }
+        }
+
         var movie = Movies.FirstOrDefault(m => m.Id == movieId);
         if (movie != null)
         {
@@ -104,6 +137,7 @@ else
                     PictureUri = movie.PictureUri,
                     MovieId = movie.Id,
                     Title = movie.Title,
+                    User = User.Email
                 };
 
             await WishService.AddToBasket(wishedItem);

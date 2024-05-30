@@ -13,6 +13,8 @@ namespace PaymentAPI.Models
 
         public DateTime Timestamp { get; set; }
 
-        public string[] MovieIds { get; set; } 
+        public string[] MovieIds { get; set; }
+
+        public string? User { get; set; }
     }
 }

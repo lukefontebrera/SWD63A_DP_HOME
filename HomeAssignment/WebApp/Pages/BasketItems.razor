@@ -29,7 +29,7 @@ else
                             <img src="@item.PictureUri" class="card-img-top" alt="Product Image" width='150' height='300'>
                             <div class="card-body">
                                 <h5 class="card-title">@item.Title</h5>
-                                <p class="card-text">Unit Price: $@item.UnitPrice.ToString("0.00")</p>
+                                <p class="card-text">Unit Price: EUR @item.UnitPrice.ToString("0.00")</p>
                                 <button type="button" class="btn btn-danger" @onclick="() => DeleteItem(item.Id)">
                                     Delete
                                 </button>
@@ -41,7 +41,7 @@ else
         }
 
         <div class="mt-3">
-            <h5>Total: $@(basketCount * 10)</h5>
+            <h5>Total: EUR @(basketCount * 10)</h5>
             <button type="button" class="btn btn-success" @onclick="ProceedToPayment">
                 Proceed to Payment
             </button>

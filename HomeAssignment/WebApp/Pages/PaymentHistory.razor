@@ -1,11 +1,11 @@
 ﻿@page "/paymentsHistory"
-
 @using SharedModels.Models
 @using WebApp.Services
+@inherits PaymentBase
 
 <h3>Payments</h3>
 
-@if (Payments != null)
+@if (Payments != null && Payments.Any())
 {
     <table class="table">
         <thead>
@@ -30,16 +30,4 @@
 else
 {
     <p>No payments found.</p>
-}
-
-@code {
-    [Inject]
-    public IPaymentService PaymentService { get; set; }
-
-    IEnumerable<PaymentDTO> Payments { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        Payments = await PaymentService.GetItems();
-    }
 }

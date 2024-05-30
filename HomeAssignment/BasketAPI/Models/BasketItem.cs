@@ -18,5 +18,7 @@ namespace BasketAPI.Models
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string? MovieId { get; set; }
+
+        public string? User { get; set; }
     }
 }

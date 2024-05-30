@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "dKkg21d4hac6P8A8WArIHcw9DktBfDEAp07zfnXhkvM=",
+  "Hash": "9V5f88xSML4JF1ZMdiNBjLmc2N6S6QBGjHVYliMpA84=",
   "Source": "PaymentAPI",
   "BasePath": "_content/PaymentAPI",
   "Mode": "Default",
@@ -10,6 +10,17 @@
       "Identity": "C:\\Users\\Luke\\Desktop\\School\\Year 3\\Distributed Programming\\Home Assignment\\SWD63A_DP_HOME\\HomeAssignment\\BasketAPI\\OrderAPI.csproj",
       "Version": 2,
       "Source": "OrderAPI",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    },
+    {
+      "Identity": "C:\\Users\\Luke\\Desktop\\School\\Year 3\\Distributed Programming\\Home Assignment\\SWD63A_DP_HOME\\HomeAssignment\\WishlistAPI\\WishlistAPI.csproj",
+      "Version": 2,
+      "Source": "WishlistAPI",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
       "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
       "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",

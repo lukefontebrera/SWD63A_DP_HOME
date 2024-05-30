@@ -14,5 +14,7 @@ namespace WishlistAPI.Models
         public string? PictureUri { get; set; }
 
         public string? MovieId { get; set; }
+
+        public string? User { get; set; }
     }
 }

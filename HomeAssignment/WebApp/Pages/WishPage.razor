@@ -13,15 +13,15 @@ else
     @if (WishedItems.Any())
     {
         const int itemsPerRow = 3;
-        var basketCount = WishedItems.Count();
-        var basketRows = (int)Math.Ceiling((double)basketCount / itemsPerRow);
+        var wishCount = WishedItems.Count();
+        var wishRows = (int)Math.Ceiling((double)wishCount / itemsPerRow);
 
-        @for (int i = 0; i < basketRows; i++)
+        @for (int i = 0; i < wishRows; i++)
         {
-            var basketRowItems = WishedItems.Skip(i * itemsPerRow).Take(itemsPerRow);
+            var wishRowItems = WishedItems.Skip(i * itemsPerRow).Take(itemsPerRow);
 
             <div class="row mt-3">
-                @foreach (var item in basketRowItems)
+                @foreach (var item in wishRowItems)
                 {
                     <div class="col-md-4 mb-3">
                         <div class="card">

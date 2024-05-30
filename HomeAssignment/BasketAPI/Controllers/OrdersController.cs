@@ -9,6 +9,7 @@ using BasketAPI.Models;
 using BasketAPI.Services;
 using System.Text;
 using Newtonsoft.Json;
+using WishlistAPI.Models;
 
 namespace BasketAPI.Controllers
 {
@@ -58,26 +59,49 @@ namespace BasketAPI.Controllers
 
                     if (response.IsSuccessStatusCode)
                     {
-                        // Process the payment
                         order.Id = GenerateId();
                         await _service.CreateAsync(order);
 
-                        // Retrieve basket items
                         var basketItemsResponse = await httpClient.GetAsync($"http://localhost:5003/gateway/BasketItems");
                         if (basketItemsResponse.IsSuccessStatusCode)
                         {
                             var content = await basketItemsResponse.Content.ReadAsStringAsync();
                             var basketItems = JsonConvert.DeserializeObject<List<BasketItem>>(content);
 
-                            // Delete each basket item
-                            foreach (var basketItem in basketItems)
+                            var currentUserBasketItems = basketItems.Where(item => item.User == order.User);
+
+                            foreach (var basketItem in currentUserBasketItems)
                             {
                                 var deleteResponse = await httpClient.DeleteAsync($"http://localhost:5003/gateway/BasketItems/{basketItem.Id}");
                                 if (!deleteResponse.IsSuccessStatusCode)
                                 {
                                     Console.WriteLine($"Failed to delete basket item {basketItem.Id}: {deleteResponse.ReasonPhrase}");
-                                    // Handle failure to delete basket item
                                 }
+                            }
+
+                            var wishedMoviesResponse = await httpClient.GetAsync($"http://localhost:5003/gateway/WishedMovies");
+                            if (wishedMoviesResponse.IsSuccessStatusCode)
+                            {
+                                var wishedMoviesContent = await wishedMoviesResponse.Content.ReadAsStringAsync();
+                                var wishedMovies = JsonConvert.DeserializeObject<List<WishedMovie>>(wishedMoviesContent);
+
+                                foreach (var movieId in order.Movies.Select(movie => movie.MovieId))
+                                {
+                                    var movieToRemove = wishedMovies.FirstOrDefault(movie => movie.MovieId == movieId);
+                                    if (movieToRemove != null)
+                                    {
+                                        var deleteResponse = await httpClient.DeleteAsync($"http://localhost:5003/gateway/WishedMovies/{movieToRemove.Id}");
+                                        if (!deleteResponse.IsSuccessStatusCode)
+                                        {
+                                            Console.WriteLine($"Failed to delete basket item {movieToRemove.Id}: {deleteResponse.ReasonPhrase}");
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                // Handle unsuccessful response
+                                Console.WriteLine($"Failed to fetch wished movies: {wishedMoviesResponse.ReasonPhrase}");
                             }
                         }
                         else
@@ -106,6 +130,8 @@ namespace BasketAPI.Controllers
                 }
             }
         }
+
+
 
 
         private async Task<bool> OrderExists(string id)

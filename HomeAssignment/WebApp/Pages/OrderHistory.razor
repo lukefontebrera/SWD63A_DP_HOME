@@ -3,6 +3,7 @@
 @using SharedModels.Models
 @using WebApp.Services
 @inject NavigationManager Navigation
+@inherits OrderBase
 
 <h3>Order History</h3>
 
@@ -36,16 +37,6 @@ else
 }
 
 @code {
-    [Inject]
-    public IOrderService OrderService { get; set; }
-
-    IEnumerable<OrderDTO> Orders { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        Orders = await OrderService.GetItems();
-    }
-
     private void ShowOrderDetails(string orderId)
     {
         Navigation.NavigateTo($"/orderDetails/{orderId}");

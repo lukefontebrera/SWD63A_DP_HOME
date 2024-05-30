@@ -23,13 +23,13 @@ else
             {
                 <div class="d-flex justify-content-between">
                     <div>@item.Title</div>
-                    <div>$@item.UnitPrice.ToString("0.00")</div>
+                    <div>EUR @item.UnitPrice.ToString("0.00")</div>
                 </div>
             }
         </div>
 
         <div class="mb-3">
-            <h5>Total: $@(BasketItems.Sum(item => item.UnitPrice).ToString("0.00"))</h5>
+            <h5>Total: EUR @(BasketItems.Sum(item => item.UnitPrice).ToString("0.00"))</h5>
         </div>
 
         <div class="mb-3">
@@ -63,7 +63,8 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        BasketItems = await BasketService.GetItems();
+        var items = await BasketService.GetItems();
+        BasketItems = items.Where(item => item.User == UserEmail);
         await base.OnInitializedAsync();
     }
 
@@ -71,28 +72,44 @@ else
     {
         BasketItems = await BasketService.GetItems();
 
-        decimal amount = BasketItems.Sum(item => item.UnitPrice);
-        DateTime timestamp = DateTime.Now;
+        // Filter basket items for the current user
+        var currentUserBasketItems = BasketItems.Where(item => item.User == UserEmail);
 
-        PaymentDTO payment = new PaymentDTO
-            {
-                Id = "123", // Dummy Data, will be filled in properly later
-                Amount = amount,
-                Timestamp = timestamp,
-                MovieIds = BasketItems.Select(item => item.MovieId).ToArray()
-            };
+        if (currentUserBasketItems.Any())
+        {
+            decimal amount = currentUserBasketItems.Sum(item => item.UnitPrice);
+            DateTime timestamp = DateTime.Now;
 
-        OrderDTO order = new OrderDTO
-            {
-                Id = Guid.NewGuid().ToString(),
-                Amount = amount,
-                Timestamp = timestamp,
-                Movies = BasketItems.ToArray()
-            };
+            // Create PaymentDTO
+            PaymentDTO payment = new PaymentDTO
+                {
+                    Id = "123", // Dummy Data, will be filled in properly later
+                    Amount = amount,
+                    Timestamp = timestamp,
+                    MovieIds = currentUserBasketItems.Select(item => item.MovieId).ToArray(),
+                    User = UserEmail
+                };
 
-        await PaymentService.AddPayment(payment);
-        await OrderService.AddOrder(order);
+            // Create OrderDTO
+            OrderDTO order = new OrderDTO
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Amount = amount,
+                    Timestamp = timestamp,
+                    Movies = currentUserBasketItems.ToArray(),
+                    User = UserEmail
+                };
 
-        Navigation.NavigateTo("/orderHistory");
+            // Add Payment and Order
+            await PaymentService.AddPayment(payment);
+            await OrderService.AddOrder(order);
+
+            Navigation.NavigateTo("/orderHistory");
+        }
+        else
+        {
+            // Display a message or handle the case where the basket is empty for the current user
+            Console.WriteLine("Basket is empty for the current user.");
+        }
     }
 }

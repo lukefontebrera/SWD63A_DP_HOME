@@ -1,11 +1,23 @@
 {
   "Version": 1,
-  "Hash": "CyanVv54uTEAgEG8BDiwKH1/ZVUf6cS2aNrEYemeAmU=",
+  "Hash": "8uJ+fLacfNo3qKsUN3uBxUMGDLqkRG4G475QZwV7EeY=",
   "Source": "OrderAPI",
   "BasePath": "_content/OrderAPI",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\Users\\Luke\\Desktop\\School\\Year 3\\Distributed Programming\\Home Assignment\\SWD63A_DP_HOME\\HomeAssignment\\WishlistAPI\\WishlistAPI.csproj",
+      "Version": 2,
+      "Source": "WishlistAPI",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
   "DiscoveryPatterns": [],
   "Assets": []
 }

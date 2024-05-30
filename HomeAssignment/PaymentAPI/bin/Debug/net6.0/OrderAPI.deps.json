@@ -14,7 +14,8 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.16",
           "MongoDB.Driver": "2.25.0",
           "RestSharp": "111.1.0",
-          "Swashbuckle.AspNetCore": "6.2.3"
+          "Swashbuckle.AspNetCore": "6.2.3",
+          "WishlistAPI": "1.0.0"
         },
         "runtime": {
           "OrderAPI.dll": {}
@@ -2655,6 +2656,18 @@
             "fileVersion": "0.7.3.0"
           }
         }
+      },
+      "WishlistAPI/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.InMemory": "6.0.27",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.29",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.16",
+          "MongoDB.Driver": "2.25.0",
+          "Swashbuckle.AspNetCore": "6.2.3"
+        },
+        "runtime": {
+          "WishlistAPI.dll": {}
+        }
       }
     }
   },
@@ -4294,6 +4307,11 @@
       "sha512": "sha512-U9Ix4l4cl58Kzz1rJzj5hoVTjmbx1qGMwzAcbv1j/d3NzrFaESIurQyg+ow4mivCgkE3S413y+U9k4WdnEIkRA==",
       "path": "zstdsharp.port/0.7.3",
       "hashPath": "zstdsharp.port.0.7.3.nupkg.sha512"
+    },
+    "WishlistAPI/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

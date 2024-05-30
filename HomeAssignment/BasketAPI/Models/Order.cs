@@ -15,5 +15,7 @@ namespace BasketAPI.Models
         public DateTime Timestamp { get; set; }
 
         public BasketItemDTO[] Movies { get; set; }
+
+        public string? User { get; set; }
     }
 }

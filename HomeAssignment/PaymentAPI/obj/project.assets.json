@@ -4012,13 +4012,34 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.16",
           "MongoDB.Driver": "2.25.0",
           "RestSharp": "111.1.0",
-          "Swashbuckle.AspNetCore": "6.2.3"
+          "Swashbuckle.AspNetCore": "6.2.3",
+          "WishlistAPI": "1.0.0"
         },
         "compile": {
           "bin/placeholder/OrderAPI.dll": {}
         },
         "runtime": {
           "bin/placeholder/OrderAPI.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "WishlistAPI/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.InMemory": "6.0.27",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.29",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.16",
+          "MongoDB.Driver": "2.25.0",
+          "Swashbuckle.AspNetCore": "6.2.3"
+        },
+        "compile": {
+          "bin/placeholder/WishlistAPI.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WishlistAPI.dll": {}
         },
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
@@ -11368,6 +11389,11 @@
       "type": "project",
       "path": "../BasketAPI/OrderAPI.csproj",
       "msbuildProject": "../BasketAPI/OrderAPI.csproj"
+    },
+    "WishlistAPI/1.0.0": {
+      "type": "project",
+      "path": "../WishlistAPI/WishlistAPI.csproj",
+      "msbuildProject": "../WishlistAPI/WishlistAPI.csproj"
     }
   },
   "projectFileDependencyGroups": {
