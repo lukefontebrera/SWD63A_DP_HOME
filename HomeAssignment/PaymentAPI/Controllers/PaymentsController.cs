@@ -101,7 +101,7 @@ namespace PaymentAPI.Controllers
 
             for (int i = 0; i < 24; i++)
             {
-                int randomNumber = random.Next(16); 
+                int randomNumber = random.Next(16);
                 hexString.Append(randomNumber.ToString("X"));
             }
 

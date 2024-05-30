@@ -1,0 +1,43 @@
+﻿@page "/inbox"
+@using SharedModels.Models
+@using WebApp.Services
+@inject NavigationManager Navigation
+@inherits OrderBase
+
+<h3>Inbox</h3>
+
+@if (Orders != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Notification</th>
+                <th>Sent On</th>
+                <th>See Ordered Items</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Orders)
+            {
+                <tr>
+                    <td>You have a new order!</td>
+                    <td>@order.Timestamp</td>
+                    <td>
+                        <button @onclick="() => ShowOrderDetails(order.Id)">Details</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No Order Notifications found.</p>
+}
+
+@code {
+    private void ShowOrderDetails(string orderId)
+    {
+        Navigation.NavigateTo($"/orderDetails/{orderId}");
+    }
+}

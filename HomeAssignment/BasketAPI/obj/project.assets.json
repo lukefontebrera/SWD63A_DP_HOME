@@ -11388,11 +11388,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Luke\\Desktop\\School\\Year 3\\Distributed Programming\\Home Assignment\\SWD63A_DP_HOME\\HomeAssignment\\BasketAPI\\OrderAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Luke\\Desktop\\HomeAssignment\\BasketAPI\\OrderAPI.csproj",
       "projectName": "OrderAPI",
-      "projectPath": "C:\\Users\\Luke\\Desktop\\School\\Year 3\\Distributed Programming\\Home Assignment\\SWD63A_DP_HOME\\HomeAssignment\\BasketAPI\\OrderAPI.csproj",
+      "projectPath": "C:\\Users\\Luke\\Desktop\\HomeAssignment\\BasketAPI\\OrderAPI.csproj",
       "packagesPath": "C:\\Users\\Luke\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Luke\\Desktop\\School\\Year 3\\Distributed Programming\\Home Assignment\\SWD63A_DP_HOME\\HomeAssignment\\BasketAPI\\obj\\",
+      "outputPath": "C:\\Users\\Luke\\Desktop\\HomeAssignment\\BasketAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -11414,8 +11414,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Luke\\Desktop\\School\\Year 3\\Distributed Programming\\Home Assignment\\SWD63A_DP_HOME\\HomeAssignment\\WishlistAPI\\WishlistAPI.csproj": {
-              "projectPath": "C:\\Users\\Luke\\Desktop\\School\\Year 3\\Distributed Programming\\Home Assignment\\SWD63A_DP_HOME\\HomeAssignment\\WishlistAPI\\WishlistAPI.csproj"
+            "C:\\Users\\Luke\\Desktop\\HomeAssignment\\WishlistAPI\\WishlistAPI.csproj": {
+              "projectPath": "C:\\Users\\Luke\\Desktop\\HomeAssignment\\WishlistAPI\\WishlistAPI.csproj"
             }
           }
         }

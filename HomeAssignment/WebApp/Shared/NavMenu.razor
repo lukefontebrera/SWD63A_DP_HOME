@@ -34,26 +34,40 @@
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Search by TV Title
             </NavLink>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="basket">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Basket
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="wishList">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Wish List
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="paymentsHistory">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Payment History
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="orderHistory">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Order History
-            </NavLink>
-        </div>
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="basket">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Basket
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="wishList">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Wish List
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="paymentsHistory">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Payment History
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="orderHistory">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Order History
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="UserDetails">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> User Details
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="Inbox">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Inbox
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
     </nav>
 </div>
 
