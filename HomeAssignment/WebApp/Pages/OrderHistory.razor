@@ -4,6 +4,7 @@
 @using WebApp.Services
 @inject NavigationManager Navigation
 @inherits OrderBase
+@using System.Security.Claims
 
 <h3>Order History</h3>
 
@@ -40,5 +41,23 @@ else
     private void ShowOrderDetails(string orderId)
     {
         Navigation.NavigateTo($"/orderDetails/{orderId}");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authenticationState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            var emailClaim = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
+            if (emailClaim != null)
+            {
+                UserEmail = emailClaim.Value;
+            }
+        }
+
+        var items = await OrderService.GetItems();
+        Orders = items.Where(item => item.User == UserEmail);
     }
 }

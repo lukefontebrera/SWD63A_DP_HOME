@@ -4,82 +4,84 @@
 @using WebApp.Services
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject UserService UserService
+@inject NavigationManager Navigation
 @using System.Security.Claims
 
-<h3>Load Upcoming Movies</h3>
-<button @onclick="LoadUpcoming">Load TV Shows</button>
-
-@if (Movies == null)
+@if (isAdmin)
 {
-    <h3>Loading Upcoming...</h3>
-}
-else
-{
-    <h3 class="mb-5">Upcoming Entities</h3>
+    <h3>Load Upcoming Entities</h3>
+    <button @onclick="LoadUpcoming">Load</button>
 
-    var moviesCount = Movies.Count();
-
-    @if (moviesCount > 0)
+    @if (Movies == null)
     {
-        const int moviesPerRow = 3;
-        var moviesRowList = new List<MovieDTO>();
+        <h3>Loading Upcoming...</h3>
+    }
+    else
+    {
+        <h3 class="mb-5">Upcoming Entities</h3>
 
-        @for (int i = 0; i < moviesCount; i++)
+        var moviesCount = Movies.Count();
+
+        @if (moviesCount > 0)
         {
-            moviesRowList = Movies.Skip(i * moviesPerRow).Take(moviesPerRow).ToList();
+            const int moviesPerRow = 3;
+            var moviesRowList = new List<MovieDTO>();
 
-            <div class="row mt-3">
+            @for (int i = 0; i < moviesCount; i++)
+            {
+                moviesRowList = Movies.Skip(i * moviesPerRow).Take(moviesPerRow).ToList();
 
-                @foreach (var item in moviesRowList)
-                {
-                    <div class="col-md-3 mb-2">
-                        <a href="#">
-                            <div class="card">
-                                <img class="img-thumbnail" src="@item.PictureUri" />
-                                <div class="card-body">
-                                    <h5 class="card-title mb-3">
-                                        @item.Title
-                                    </h5>
-                                    <p class="card-text">
-                                        <b>EUR @item.Price.ToString()</b>
-                                    </p>
-                                    <p class="card-text">
-                                        <b>Description:</b> @item.Description
-                                    </p>
-                                    <p class="card-text">
-                                        <b>Caption:</b> @item.Caption
-                                    </p>
-                                    <p class="card-text">
-                                        <b>Release Year:</b> @item.ReleaseYear
-                                    </p>
-                                    @if (item.ReleaseDate.HasValue)
-                                    {
+                <div class="row mt-3">
+                    @foreach (var item in moviesRowList)
+                    {
+                        <div class="col-md-3 mb-2">
+                            <a href="#">
+                                <div class="card">
+                                    <img class="img-thumbnail" src="@item.PictureUri" />
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-3">
+                                            @item.Title
+                                        </h5>
                                         <p class="card-text">
-                                            <b>Release Date:</b> @item.ReleaseDate.Value.ToShortDateString()
+                                            <b>EUR @item.Price.ToString()</b>
                                         </p>
-                                    }
-                                    <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-primary" @onclick="()=>NotifyUser(item.Id)">Notify Users</button>
+                                        <p class="card-text">
+                                            <b>Description:</b> @item.Description
+                                        </p>
+                                        <p class="card-text">
+                                            <b>Caption:</b> @item.Caption
+                                        </p>
+                                        <p class="card-text">
+                                            <b>Release Year:</b> @item.ReleaseYear
+                                        </p>
+                                        @if (item.ReleaseDate.HasValue)
+                                        {
+                                            <p class="card-text">
+                                                <b>Release Date:</b> @item.ReleaseDate.Value.ToShortDateString()
+                                            </p>
+                                        }
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-primary" @onclick="()=>NotifyUser(item.Id)">Notify Users</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                }
-            </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            }
         }
     }
 }
+else
+{
+    <h3>You do not have permission to view this page.</h3>
+}
 
 @code {
-    private async Task LoadUpcoming()
-    {
-        Movies = await MovieService.GetUpcoming();
-    }
+    private bool isAdmin = false;
 
-    private UserDTO User;
-
-    private async Task NotifyUser(string movieId)
+    protected override async Task OnInitializedAsync()
     {
         var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authenticationState.User;
@@ -90,10 +92,27 @@ else
             if (emailClaim != null)
             {
                 var email = emailClaim.Value;
+                if (email == "admin@admin.com")
+                {
+                    isAdmin = true;
+                }
                 User = await UserService.GetUserByEmailAsync(email);
             }
         }
+    }
 
+    private async Task LoadUpcoming()
+    {
+        if (isAdmin)
+        {
+            Movies = await MovieService.GetUpcoming();
+        }
+    }
+
+    private UserDTO User;
+
+    private async Task NotifyUser(string movieId)
+    {
         var movie = Movies.FirstOrDefault(m => m.Id == movieId);
         if (movie != null)
         {

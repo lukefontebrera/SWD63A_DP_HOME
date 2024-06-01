@@ -77,8 +77,9 @@ else
                     UserEmail = emailClaim.Value;
                 }
             }
+            var orderItems = await OrderService.GetItems();
+            Orders = orderItems.Where(item => item.User == UserEmail);
 
-            Orders = await OrderService.GetItems();
             Movies = await MovieService.GetItems();
         }
     }
