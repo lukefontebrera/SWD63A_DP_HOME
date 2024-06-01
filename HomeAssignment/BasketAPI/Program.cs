@@ -1,6 +1,7 @@
 using BasketAPI.Models;
 using BasketAPI.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Publisher.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +12,13 @@ builder.Services.Configure<BasketDatabaseSettings>(
 builder.Services.Configure<OrderDatabaseSettings>(
     builder.Configuration.GetSection("OrderDatabaseSettings"));
 
+// Configure GCP settings
+builder.Services.Configure<GCPSettings>(
+    builder.Configuration.GetSection("GCP"));
+
 builder.Services.AddSingleton<BasketService>();
 builder.Services.AddSingleton<OrderService>();
+builder.Services.AddSingleton<PublisherService>();
 
 builder.Services.AddControllers();
 

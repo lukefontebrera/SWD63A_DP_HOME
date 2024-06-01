@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System;
-
+using Publisher.Services;
+using SharedModels.Models;
 
 namespace PaymentAPI.Controllers
 {
@@ -18,10 +19,12 @@ namespace PaymentAPI.Controllers
     public class PaymentsController : ControllerBase
     {
         private readonly PaymentService _service;
+        private readonly PublisherService _publisherService;
 
-        public PaymentsController(PaymentService service)
+        public PaymentsController(PaymentService service, PublisherService publisherService)
         {
             _service = service;
+            _publisherService = publisherService;
         }
 
         // GET: api/Payments
@@ -64,9 +67,10 @@ namespace PaymentAPI.Controllers
                         payment.Id = GenerateId();
                         await _service.CreateAsync(payment);
 
-                        // Delete of BasketItems is handled in Order instead
+                        string message = "Payment has been completed: " + JsonConvert.SerializeObject(payment);
+                        await _publisherService.PublishMessage(message, "PaymentAPI");
 
-                        return Ok();
+                        return Ok(payment);
                     }
                     else
                     {

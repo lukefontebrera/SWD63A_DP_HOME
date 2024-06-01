@@ -1914,11 +1914,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Luke\\Desktop\\HomeAssignment\\IdentityAPI\\IdentityAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Luke\\Desktop\\School\\Year 3\\Distributed Programming\\Home Assignment\\SWD63A_DP_HOME\\HomeAssignment\\IdentityAPI\\IdentityAPI.csproj",
       "projectName": "IdentityAPI",
-      "projectPath": "C:\\Users\\Luke\\Desktop\\HomeAssignment\\IdentityAPI\\IdentityAPI.csproj",
+      "projectPath": "C:\\Users\\Luke\\Desktop\\School\\Year 3\\Distributed Programming\\Home Assignment\\SWD63A_DP_HOME\\HomeAssignment\\IdentityAPI\\IdentityAPI.csproj",
       "packagesPath": "C:\\Users\\Luke\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Luke\\Desktop\\HomeAssignment\\IdentityAPI\\obj\\",
+      "outputPath": "C:\\Users\\Luke\\Desktop\\School\\Year 3\\Distributed Programming\\Home Assignment\\SWD63A_DP_HOME\\HomeAssignment\\IdentityAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1940,8 +1940,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Luke\\Desktop\\HomeAssignment\\Middleware\\Middleware.csproj": {
-              "projectPath": "C:\\Users\\Luke\\Desktop\\HomeAssignment\\Middleware\\Middleware.csproj"
+            "C:\\Users\\Luke\\Desktop\\School\\Year 3\\Distributed Programming\\Home Assignment\\SWD63A_DP_HOME\\HomeAssignment\\Middleware\\Middleware.csproj": {
+              "projectPath": "C:\\Users\\Luke\\Desktop\\School\\Year 3\\Distributed Programming\\Home Assignment\\SWD63A_DP_HOME\\HomeAssignment\\Middleware\\Middleware.csproj"
             }
           }
         }

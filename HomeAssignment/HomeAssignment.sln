@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WishlistAPI", "WishlistAPI\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentAPI", "PaymentAPI\PaymentAPI.csproj", "{E891CB96-3699-4FF6-95DA-F126724A70CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publisher", "Publisher\Publisher.csproj", "{D20B22D9-0489-4EA5-8D06-18306D41B091}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subscriber", "Subscriber\Subscriber.csproj", "{C274D44B-E7D5-4CBF-80A0-2CC1C1981865}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +63,14 @@ Global
 		{E891CB96-3699-4FF6-95DA-F126724A70CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E891CB96-3699-4FF6-95DA-F126724A70CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E891CB96-3699-4FF6-95DA-F126724A70CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D20B22D9-0489-4EA5-8D06-18306D41B091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D20B22D9-0489-4EA5-8D06-18306D41B091}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D20B22D9-0489-4EA5-8D06-18306D41B091}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D20B22D9-0489-4EA5-8D06-18306D41B091}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C274D44B-E7D5-4CBF-80A0-2CC1C1981865}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C274D44B-E7D5-4CBF-80A0-2CC1C1981865}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C274D44B-E7D5-4CBF-80A0-2CC1C1981865}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C274D44B-E7D5-4CBF-80A0-2CC1C1981865}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +82,7 @@ Global
 		SharedModels\SharedModels.projitems*{528c9c55-cb38-48c2-9fe5-c829da3ccecc}*SharedItemsImports = 13
 		SharedModels\SharedModels.projitems*{8a1fb16c-ac3e-4888-8c69-fd3857d1b1c9}*SharedItemsImports = 5
 		SharedModels\SharedModels.projitems*{9e9bacae-7e3f-4a8c-8b92-58053a1da625}*SharedItemsImports = 5
+		SharedModels\SharedModels.projitems*{c274d44b-e7d5-4cbf-80a0-2cc1c1981865}*SharedItemsImports = 5
 		SharedModels\SharedModels.projitems*{c672b498-332d-4d6c-9f7f-5339b15e20e2}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

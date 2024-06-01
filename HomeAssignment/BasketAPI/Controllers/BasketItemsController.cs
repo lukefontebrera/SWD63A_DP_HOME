@@ -9,6 +9,7 @@ using BasketAPI.Models;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using BasketAPI.Services;
+using Publisher.Services;
 
 namespace BasketAPI.Controllers
 {
@@ -17,10 +18,12 @@ namespace BasketAPI.Controllers
     public class BasketItemsController : ControllerBase
     {
         private readonly BasketService _service;
+        private readonly PublisherService _publisherService;
 
-        public BasketItemsController(BasketService service)
+        public BasketItemsController(BasketService service, PublisherService publisherService)
         {
             _service = service;
+            _publisherService = publisherService;
         }
 
         // GET: api/BasketItems
@@ -111,6 +114,9 @@ namespace BasketAPI.Controllers
                         basketItem.Title = firstItem["title"].Value<string>();
                         basketItem.UnitPrice = firstItem["price"].Value<decimal>();
                         basketItem.MovieId = movieId;
+
+                        string message = "Item added to the basket: " + JsonConvert.SerializeObject(basketItem);
+                        await _publisherService.PublishMessage(message, "BasketAPI");
 
                         await _service.CreateAsync(basketItem);
 

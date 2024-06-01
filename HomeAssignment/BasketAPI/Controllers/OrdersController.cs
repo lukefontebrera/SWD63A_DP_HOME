@@ -10,6 +10,7 @@ using BasketAPI.Services;
 using System.Text;
 using Newtonsoft.Json;
 using WishlistAPI.Models;
+using Publisher.Services;
 
 namespace BasketAPI.Controllers
 {
@@ -18,10 +19,13 @@ namespace BasketAPI.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly OrderService _service;
+        private readonly PublisherService _publisherService;
 
-        public OrdersController(OrderService service)
+        public OrdersController(OrderService service, PublisherService publisherService)
         {
             _service = service;
+            _publisherService = publisherService;
+
         }
 
         // GET: api/Orders
@@ -62,6 +66,9 @@ namespace BasketAPI.Controllers
                         order.Id = GenerateId();
                         await _service.CreateAsync(order);
 
+                        string message = "Order has been completed: " + JsonConvert.SerializeObject(order);
+                        await _publisherService.PublishMessage(message, "BasketAPI");
+
                         var basketItemsResponse = await httpClient.GetAsync($"http://localhost:5003/gateway/BasketItems");
                         if (basketItemsResponse.IsSuccessStatusCode)
                         {
@@ -78,6 +85,9 @@ namespace BasketAPI.Controllers
                                     Console.WriteLine($"Failed to delete basket item {basketItem.Id}: {deleteResponse.ReasonPhrase}");
                                 }
                             }
+
+                            message = "User notified about new order: " + JsonConvert.SerializeObject(order);
+                            await _publisherService.PublishMessage(message, "BasketAPI");
 
                             var wishedMoviesResponse = await httpClient.GetAsync($"http://localhost:5003/gateway/WishedMovies");
                             if (wishedMoviesResponse.IsSuccessStatusCode)
@@ -98,6 +108,7 @@ namespace BasketAPI.Controllers
                                     }
                                 }
                             }
+
                             else
                             {
                                 // Handle unsuccessful response

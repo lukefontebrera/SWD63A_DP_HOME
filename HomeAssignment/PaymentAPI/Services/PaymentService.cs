@@ -1,6 +1,10 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using Newtonsoft.Json;
 using PaymentAPI.Models;
+using Publisher.Services;
+using SharedModels.Models;
+using System.Threading.Tasks;
 
 namespace PaymentAPI.Services
 {
@@ -27,11 +31,11 @@ namespace PaymentAPI.Services
         public async Task<Payment?> GetAsync(string id) =>
             await _paymentCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-        public async Task CreateAsync(Payment newProduct) =>
-            await _paymentCollection.InsertOneAsync(newProduct);
+        public async Task CreateAsync(Payment newPayment) =>
+            await _paymentCollection.InsertOneAsync(newPayment);
 
-        public async Task UpdateAsync(string id, Payment updatedProduct) =>
-            await _paymentCollection.ReplaceOneAsync(x => x.Id == id, updatedProduct);
+        public async Task UpdateAsync(string id, Payment updatedPayment) =>
+            await _paymentCollection.ReplaceOneAsync(x => x.Id == id, updatedPayment);
 
         public async Task RemoveAsync(string id) =>
             await _paymentCollection.DeleteOneAsync(x => x.Id == id);

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZNgCueBhCUkeNQjw5ZpXG5oi9CZn/tInbLLOgJJnZLq4rDIE9ioOXIe5jOzVMxOZQJxgNJKQiaRLroG3jvDKFg==",
+  "dgSpecHash": "4u+inEj9bMzHPW3ok9Psh+JbMVszgyXnYGsmiRFkYE8MxbmOviCWpo7JuD4SelS6I6Y3+XKdbQS3OBcwV+ekCA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Luke\\Desktop\\HomeAssignment\\IdentityAPI\\IdentityAPI.csproj",
+  "projectFilePath": "C:\\Users\\Luke\\Desktop\\School\\Year 3\\Distributed Programming\\Home Assignment\\SWD63A_DP_HOME\\HomeAssignment\\IdentityAPI\\IdentityAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Luke\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\Luke\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",

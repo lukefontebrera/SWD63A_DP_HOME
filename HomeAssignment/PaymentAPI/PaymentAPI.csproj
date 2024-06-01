@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BasketAPI\OrderAPI.csproj" />
+    <ProjectReference Include="..\Publisher\Publisher.csproj" />
   </ItemGroup>
 
 </Project>
