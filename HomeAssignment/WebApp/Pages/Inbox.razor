@@ -1,43 +1,85 @@
 ﻿@page "/inbox"
 @using SharedModels.Models
 @using WebApp.Services
+@using System.Security.Claims
 @inject NavigationManager Navigation
 @inherits OrderBase
 
 <h3>Inbox</h3>
 
-@if (Orders != null)
+@if ((Orders != null && Orders.Any()) || (Movies != null && Movies.Any()))
 {
     <table class="table">
         <thead>
             <tr>
+                <th>Type</th>
                 <th>Notification</th>
                 <th>Sent On</th>
-                <th>See Ordered Items</th>
+                <th>Details</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var order in Orders)
+            @if (Orders != null)
             {
-                <tr>
-                    <td>You have a new order!</td>
-                    <td>@order.Timestamp</td>
-                    <td>
-                        <button @onclick="() => ShowOrderDetails(order.Id)">Details</button>
-                    </td>
-                </tr>
+                foreach (var order in Orders)
+                {
+                    <tr>
+                        <td>Order</td>
+                        <td>You have a new order!</td>
+                        <td>@order.Timestamp</td>
+                        <td>
+                            <button @onclick="() => ShowOrderDetails(order.Id)">Details</button>
+                        </td>
+                    </tr>
+                }
+            }
+            @if (Movies != null)
+            {
+                foreach (var movie in Movies)
+                {
+                    <tr>
+                        <td>Movie</td>
+                        <td>A new movie is shortly being added to our site!: @movie.Title</td>
+                        <td></td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                }
             }
         </tbody>
     </table>
 }
 else
 {
-    <p>No Order Notifications found.</p>
+    <p>No Notifications found.</p>
 }
 
 @code {
     private void ShowOrderDetails(string orderId)
     {
         Navigation.NavigateTo($"/orderDetails/{orderId}");
+    }
+
+    @code {
+        protected override async Task OnInitializedAsync()
+        {
+            await base.OnInitializedAsync();
+
+            var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authenticationState.User;
+
+            if (user.Identity.IsAuthenticated)
+            {
+                var emailClaim = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
+                if (emailClaim != null)
+                {
+                    UserEmail = emailClaim.Value;
+                }
+            }
+
+            Orders = await OrderService.GetItems();
+            Movies = await MovieService.GetItems();
+        }
     }
 }

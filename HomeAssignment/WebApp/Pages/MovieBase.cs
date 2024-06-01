@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using SharedModels.Models;
 using WebApp.Services;
 
@@ -84,6 +85,25 @@ namespace WebApp.Pages
                     Movies = null;
                 }
             }
+        }
+
+        protected async Task UpcomingByGenre()
+        {
+            try
+            {
+                Movies = await MovieService.GetUpcoming();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading movies by genre: {ex.Message}");
+
+                Movies = null;
+            }
+        }
+
+        protected async Task LoadBasketItems()
+        {
+            var items = await MovieService.GetItems();
         }
 
         protected override async Task OnInitializedAsync()

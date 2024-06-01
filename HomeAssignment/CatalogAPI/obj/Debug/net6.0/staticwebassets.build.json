@@ -1,11 +1,23 @@
 {
   "Version": 1,
-  "Hash": "73hNwudb50e2Bxpq21FpqQlJwPIEbNxJt3RobUsAxFQ=",
+  "Hash": "ysXxGhs/hnUDBbb2xlQa6lP/sj574IWx7Of3kRlLEew=",
   "Source": "CatalogAPI",
   "BasePath": "_content/CatalogAPI",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\Users\\Luke\\Desktop\\School\\Year 3\\Distributed Programming\\Home Assignment\\SWD63A_DP_HOME\\HomeAssignment\\Publisher\\Publisher.csproj",
+      "Version": 2,
+      "Source": "Publisher",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
   "DiscoveryPatterns": [],
   "Assets": []
 }

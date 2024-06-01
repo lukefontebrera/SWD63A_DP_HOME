@@ -52,6 +52,30 @@
       ]
     },
     {
+      "UpstreamPathTemplate": "/gateway/Movies/titles/x/upcoming",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Movies/titles/x/upcoming",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5032
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Movies",
+      "UpstreamHttpMethod": [ "POST", "GET"],
+      "DownstreamPathTemplate": "/api/Movies",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5032
+        }
+      ]
+    },
+    {
       "UpstreamPathTemplate": "/gateway/identity/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post" ],
       "DownstreamPathTemplate": "/api/identity/{everything}",
@@ -107,7 +131,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5031 
+          "Port": 5031
         }
       ]
     },
@@ -155,7 +179,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5258 
+          "Port": 5258
         }
       ]
     },
@@ -167,7 +191,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5258 
+          "Port": 5258
         }
       ]
     },
@@ -179,7 +203,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5028 
+          "Port": 5028
         }
       ]
     },
@@ -191,7 +215,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5028 
+          "Port": 5028
         }
       ]
     }

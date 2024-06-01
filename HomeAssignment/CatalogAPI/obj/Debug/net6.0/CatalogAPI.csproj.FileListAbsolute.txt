@@ -1054,3 +1054,24 @@ C:\Users\Luke\Desktop\HomeAssignment\CatalogAPI\obj\Debug\net6.0\refint\CatalogA
 C:\Users\Luke\Desktop\HomeAssignment\CatalogAPI\obj\Debug\net6.0\CatalogAPI.pdb
 C:\Users\Luke\Desktop\HomeAssignment\CatalogAPI\obj\Debug\net6.0\CatalogAPI.genruntimeconfig.cache
 C:\Users\Luke\Desktop\HomeAssignment\CatalogAPI\obj\Debug\net6.0\ref\CatalogAPI.dll
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\Publisher.deps.json
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\Publisher.runtimeconfig.json
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\Publisher.exe
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\Google.Api.CommonProtos.dll
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\Google.Api.Gax.dll
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\Google.Api.Gax.Grpc.dll
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\Google.Apis.dll
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\Google.Apis.Auth.dll
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\Google.Apis.Core.dll
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\Google.Cloud.Iam.V1.dll
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\Google.Cloud.PubSub.V1.dll
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\Google.Protobuf.dll
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\Grpc.Auth.dll
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\Grpc.Core.Api.dll
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\Grpc.Net.Client.dll
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\Grpc.Net.Common.dll
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\System.CodeDom.dll
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\System.Management.dll
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Management.dll
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\Publisher.dll
+C:\Users\Luke\Desktop\School\Year 3\Distributed Programming\Home Assignment\SWD63A_DP_HOME\HomeAssignment\CatalogAPI\bin\Debug\net6.0\Publisher.pdb

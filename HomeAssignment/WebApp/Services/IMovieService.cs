@@ -11,5 +11,11 @@ namespace WebApp.Services
         Task<IEnumerable<MovieDTO>> GetTVShowByGenre(string genre);
 
         Task<IEnumerable<MovieDTO>> GetTVByName(string name);
+
+        Task<IEnumerable<MovieDTO>> GetUpcoming();
+
+        Task<IEnumerable<MovieDTO>> GetItems();
+
+        Task AddUpcoming(MovieDTO movie);
     }
 }

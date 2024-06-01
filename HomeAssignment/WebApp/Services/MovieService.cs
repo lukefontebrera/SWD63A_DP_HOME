@@ -63,5 +63,38 @@ namespace WebApp.Services
                 throw;
             }
         }
+
+        public async Task<IEnumerable<MovieDTO>> GetUpcoming()
+        {
+            try
+            {
+                var movie = await _httpClient.GetFromJsonAsync<IEnumerable<MovieDTO>>($"gateway/Movies/titles/x/upcoming");
+                return movie;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task AddUpcoming(MovieDTO movie)
+        {
+
+            var response = await _httpClient.PostAsJsonAsync("gateway/Movies", movie);
+            response.EnsureSuccessStatusCode();
+        }
+
+        public async Task<IEnumerable<MovieDTO>> GetItems()
+        {
+            try
+            {
+                var movies = await _httpClient.GetFromJsonAsync<IEnumerable<MovieDTO>>("gateway/Movies");
+                return movies;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

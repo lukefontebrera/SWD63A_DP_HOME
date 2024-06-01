@@ -2,6 +2,7 @@ using CatalogAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using CatalogAPI.Services;
+using Publisher.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ builder.Services.Configure<DatabaseSettings>(
     builder.Configuration.GetSection("SWD63ADPHOME"));
 
 builder.Services.AddSingleton<MovieService>();
+builder.Services.AddSingleton<UpcomingService>();
+builder.Services.AddSingleton<PublisherService>();
 
 // Add services to the container.
 
